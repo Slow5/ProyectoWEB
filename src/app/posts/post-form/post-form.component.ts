@@ -23,4 +23,15 @@ export class PostFormComponent{
    form.resetForm();
    form.onReset();
   }
+
+  validar(){
+    let usuario = localStorage.getItem('usertype');
+    let validar = false;
+      if(usuario?.includes("usuario")){
+          validar = true;
+      }else{
+        validar = false;
+      }
+      return validar;
+  }
 }

@@ -1,9 +1,10 @@
-<div class="conteiner">
+<div class="conteiner" *ngIf="validar()">
     <h3>Danos tu opinion</h3>
     <hr>
     <br>
 
     <form class="example-form" (submit)="onAddPost(postForm)" #postForm="ngForm">
+      
         <mat-form-field class="example-full-width">
 
           <mat-label>¿Nos visitarias?</mat-label>

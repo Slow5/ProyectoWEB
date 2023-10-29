@@ -1,22 +1,4 @@
 <div class="conteiner">
-
-  <script>
-
-    function validarCampo() {
-      
-        var inputCampo = document.getElementById("email");
-        var valor = inputCampo.value;
-
-        if (valor === "") {
-            alert("Este campo no puede estar vacío");
-            return false; // Impide que se envíe el formulario
-        }
-
-        return true; // Permite que se envíe el formulario si el campo es válido
-    }
-    
-</script>
-
   <mat-card>
     <mat-card-header>
       <mat-card-title>Registrarse</mat-card-title>
@@ -24,12 +6,12 @@
     <mat-card-content>
       <form (submit)="SignUp(login)" #login="ngForm">
         <mat-form-field>
-          <input matInput placeholder="Nombre de usuario" ngModel id="email" name="email" type="text" #email="ngModel">
+          <input matInput placeholder="Nombre de usuario" ngModel required name="email" type="text" #email="ngModel">
           <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput type="password" placeholder="Contraseña" ngModel  name="password" type="password" #password="ngModel">
+          <input matInput type="password" placeholder="Contraseña" ngModel required name="password" type="password" #password="ngModel">
           <mat-error *ngIf="password.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
         <mat-card-actions>

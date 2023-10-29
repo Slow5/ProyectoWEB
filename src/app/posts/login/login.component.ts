@@ -14,13 +14,33 @@ export class LoginComponent {
 
   logIn(form: NgForm){
     if(form.invalid){
-      alert("Debes llenar los campos!")
-      return
+      alert("No ingreso datos");
+      return;
     }
     this.authService.logIn(form.value.email, form.value.password).subscribe( res =>{
       console.log(res)
       localStorage.setItem('token', res.token);
       this.router.navigate(['/main']);
+    },
+    err =>{
+      console.log(err)
+    })
+  }
+
+  logTypeIn(form: NgForm){
+    this.authService.getAcountType(form.value.email, form.value.password).subscribe( res =>{
+      console.log(res)
+      localStorage.setItem('usertype', JSON.stringify(res.type));
+    },
+    err =>{
+      console.log(err)
+    })
+  }
+
+  logIdIn(form: NgForm){
+    this.authService.getUserId(form.value.email, form.value.password).subscribe( res =>{
+      console.log(res)
+      localStorage.setItem('userid', res.id);
     },
     err =>{
       console.log(err)

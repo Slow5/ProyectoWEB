@@ -17,7 +17,34 @@ export class PostCardComponent implements OnInit, OnDestroy{
   private postSub: Subscription;
 
   constructor(public postService: PostService){}
+  
+  ngOnInit(){
+    this.postService.getPosts();
+    this.postSub = this.postService.getPostsUpdateListerner().subscribe((posts: Post[]) =>{
+      this.posts = posts;
+    });
+  }
 
+  onDelete(postId: string){
+    this.postService.deletePost(postId);
+  }
+
+  validar(){
+    let usuario = localStorage.getItem('usertype');
+    let validar = false;
+      if(usuario?.includes("admin")){
+          validar = true;
+      }else{
+        validar = false;
+      }
+      return validar;
+  }
+
+  ngOnDestroy(){
+    this.postSub.unsubscribe();
+  }
+
+  /*
   ngOnInit(){
     this.posts = this.postService.getPosts();
     this.postSub = this.postService.getPostsUpdateListerner().subscribe((posts: Post[]) =>{
@@ -34,5 +61,5 @@ export class PostCardComponent implements OnInit, OnDestroy{
       this.posts.splice(index, 1);
     }
     this.postService.deletePost(index);
-  }
+  } */
 }

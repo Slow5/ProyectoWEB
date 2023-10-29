@@ -9,5 +9,50 @@
        <mat-chip-option (click)="openDialogII()">INFORMACION</mat-chip-option>
      </mat-chip-listbox>
    </div>
-  <hr>
+  
+   <hr>
+
+   
+  <div *ngIf="validar()" class="padre_admin">
+    <h2>Administrador</h2>
+    <hr>
+    <h3>Usuarios Existentes</h3>
+    <mat-accordion multi="true" *ngIf="users.length > 0">
+      <mat-expansion-panel *ngFor="let user of users">
+        <mat-expansion-panel-header>
+         {{user.email}}
+        </mat-expansion-panel-header>
+        <p>{{user.password}}</p>
+        <mat-action-row>
+          <button mat-button *ngIf="user.id != validarUsuario()" (click)="onDelete(user.id)" color="warn">Eliminar</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+    <p class="info-text mat-body-1" *ngIf="users.length <= 0">
+        No hay Usuarios
+    </p>
+
+    <br>
+
+    <div class="admin">
+      <h3>Creacion de Admins</h3>
+        <form (submit)="SignUp(login)" #login="ngForm">
+        <mat-form-field>
+          <input matInput placeholder="Nombre de usuario" ngModel required name="email" 
+          type="text" 
+          #email="ngModel">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Contraseña" ngModel required name="password" type="password" #password="ngModel">
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-button color="primary" type="submit">Iniciar</button>
+        </mat-card-actions>
+      </form>
+    </div>
+    
+  </div>
+  
 </div>

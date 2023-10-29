@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -34,6 +35,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { PostService } from './posts/posts.service';
 import { LoginComponent } from './posts/login/login.component';
@@ -79,7 +81,8 @@ import { RegisterComponent } from './posts/register/register.component';
     MatInputModule,
     FormsModule, 
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [
     PostService,

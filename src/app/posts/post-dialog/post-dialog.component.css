@@ -6,7 +6,25 @@
     justify-content: center;
 }
 
-h2 {
+.padre_admin{
+    border: black 1px solid ;
+    padding: 30px;
+}
+
+h2,h3 {
     padding: 15px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.admin{
+    margin-top: 10px;
+    border: black 1px solid;
+    padding: 50px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+mat-card-actions{
+    justify-content: center;
 }
