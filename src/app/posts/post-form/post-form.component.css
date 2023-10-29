@@ -1,0 +1,15 @@
+.example-form {
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .conteiner {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    background: white;
+}

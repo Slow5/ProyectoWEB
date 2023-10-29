@@ -1,0 +1,19 @@
+.conteiner {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 10px;
+}
+  .example-card {
+    max-width: 500px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .example-header-image {
+    background-image: url('https://scontent-qro1-1.xx.fbcdn.net/v/t39.30808-6/378179208_790687149728604_8728507355373902403_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=a2f6c7&_nc_eui2=AeHqtIKxkeWgHnoXIHp4ImW0qiXwHFKrQwiqJfAcUqtDCD6g8b6_etq_f8k23lw0T-TE7wKpo9if9-5GPwz3Jbuq&_nc_ohc=P-QRfchegVQAX8cmAxk&_nc_ht=scontent-qro1-1.xx&oh=00_AfBOZnFIkudGcujsq63IjAON75IwEx8JEsB9x0vsL2CYBQ&oe=65147EFB');
+    background-size: cover;
+  }
+  

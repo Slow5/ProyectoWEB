@@ -1,0 +1,30 @@
+.conteiner {
+    background: white;
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.tabla {
+    width: auto;
+    height: auto;
+}
+
+td, th, h2, h3{
+    font-family: 'Courier New', Courier, monospace;
+}
+h2 {
+    text-align: center;
+}
+
+td:hover {
+    color: orange;
+    transform: scale(1.1);
+    transition: 0.2s ease-in;
+}
+
+th {
+    color:orange;
+}
+

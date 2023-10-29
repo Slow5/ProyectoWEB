@@ -1,0 +1,25 @@
+.example-small-box, .example-large-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 26px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .example-small-box {
+    height: 400px;
+    width: 450px;
+  }
+  
+  .example-large-box {
+    height: 550px;
+    width: 550px;
+  }
+
+  .conteiner {
+    width: 80%;
+    margin:auto;
+    padding:10px;
+    
+  }

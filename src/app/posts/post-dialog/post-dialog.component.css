@@ -1,0 +1,12 @@
+.conteiner {
+    padding: 50px;
+    margin: auto;
+    width: 80%;
+    height: auto;
+    justify-content: center;
+}
+
+h2 {
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}

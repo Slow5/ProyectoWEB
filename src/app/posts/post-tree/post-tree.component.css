@@ -1,0 +1,21 @@
+.conteiner {
+  margin: 50px;
+}
+.example-tree-progress-bar {
+    margin-left: 30px;
+}
+
+.Tree { 
+  font-family: 'Courier New', Courier, monospace;
+  padding: 5px;
+  background: black;
+}
+
+h3 {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+mat-tree-node:hover{
+  color:orange;
+  transition: 0.2s ease-in;
+}

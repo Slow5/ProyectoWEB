@@ -1,0 +1,46 @@
+<div class="conteiner">
+  <h2>Menu</h2>
+    <div class="tabla">
+      <h3>Hambuerguesas</h3>
+      <hr>
+      <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="Hamburguesa">
+              <th mat-header-cell *matHeaderCellDef> Hambuerguesa </th>
+              <td mat-cell *matCellDef="let element"> {{element.Hambuerguesa}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Ingredientes">
+              <th mat-header-cell *matHeaderCellDef> Ingredientes </th>
+              <td mat-cell *matCellDef="let element"> {{element.Ingredientes}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Precio">
+              <th mat-header-cell *matHeaderCellDef> Precio </th>
+              <td mat-cell *matCellDef="let element"> {{element.Precio}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>
+    <br>
+    <div class="tabla">
+      <h3>Entradas</h3>
+      <hr>
+      <table  mat-table [dataSource]="dataSourceII" class="mat-elevation-z8">
+            <ng-container matColumnDef="Hamburguesa">
+              <th mat-header-cell *matHeaderCellDef>  </th>
+              <td mat-cell *matCellDef="let element"> {{element.Hambuerguesa}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Ingredientes">
+              <th mat-header-cell *matHeaderCellDef> Ingredientes </th>
+              <td mat-cell *matCellDef="let element"> {{element.Ingredientes}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Precio">
+              <th mat-header-cell *matHeaderCellDef> Precio </th>
+              <td mat-cell *matCellDef="let element"> {{element.Precio}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="Columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: Columns;"></tr>
+          </table>
+    </div>
+</div>
+
+
