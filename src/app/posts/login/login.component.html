@@ -1,29 +1,30 @@
-<div class="container">
-  <mat-card>
-    <mat-card-content>
-      <h2>Login</h2>
+  <div class="container">
+    <mat-card>
+      <mat-card-content>
+        <h2>Login</h2>
+  
+        <form (submit)="logIn(login)" 
+        (submit)="logTypeIn(login)" 
+        (submit)="logIdIn(login)"
+        #login="ngForm">
+        
+          <mat-form-field>
+            <input matInput placeholder="Nombre de usuario" ngModel required name="email" 
+            type="text" 
+            #email="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Contraseña" ngModel required name="password" type="password" #password="ngModel">
+          </mat-form-field>
+  
+          <mat-card-actions>
+            <button mat-button type="submit">Iniciar sesión</button>
+            <button mat-button routerLink="/register">Registrarse</button>
+          </mat-card-actions>
+        </form>
+  
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-      <form (submit)="logIn(login)" 
-      (submit)="logTypeIn(login)" 
-      (submit)="logIdIn(login)"
-      #login="ngForm">
-      
-        <mat-form-field>
-          <input matInput placeholder="Nombre de usuario" ngModel required name="email" 
-          type="text" 
-          #email="ngModel">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input matInput type="password" placeholder="Contraseña" ngModel required name="password" type="password" #password="ngModel">
-        </mat-form-field>
-
-        <mat-card-actions>
-          <button mat-button type="submit">Iniciar sesión</button>
-          <button mat-button routerLink="/register">Registrarse</button>
-        </mat-card-actions>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
-</div>
