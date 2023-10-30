@@ -44,6 +44,8 @@ export class LoginComponent {
     },
     err =>{
       console.log(err)
+      alert("usuario no existente")
+      form.resetForm();
     })
   }
 
