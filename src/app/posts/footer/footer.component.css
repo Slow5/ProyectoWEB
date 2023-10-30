@@ -17,6 +17,8 @@ h2, a {
     color: white;
     padding: 5px;
     font-family: 'Courier New', Courier, monospace;
+    background: orange; 
+    text-shadow: 3px 3px 3px black;
 }
 button {
     margin: 15px;

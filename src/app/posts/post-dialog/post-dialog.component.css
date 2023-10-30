@@ -14,6 +14,8 @@
 h2,h3 {
     padding: 15px;
     font-family: 'Courier New', Courier, monospace;
+    background: orange; 
+    font-weight: bold;
 }
 
 .admin{

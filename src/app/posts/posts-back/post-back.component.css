@@ -13,8 +13,11 @@
 }
 
 h2 {
-    font-size: 50px;
+    font-size: 200px;
     color: black;
     font-family: 'Courier New', Courier, monospace;
     padding: 10px;
+    font-weight: bold;
+    background: orange; 
+    padding: 20px; 
 }
