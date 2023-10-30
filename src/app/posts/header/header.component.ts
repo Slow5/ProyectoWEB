@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-
+import { AuthService } from '../auth.services';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html', 
@@ -7,5 +7,10 @@ import {Component} from '@angular/core';
   })
 
 export class HeaderComponent{
-    
+  constructor(public authService : AuthService){}
+
+  cerrar(){
+    this.authService.logOut();
+  }
+  
 }

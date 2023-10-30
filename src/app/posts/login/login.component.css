@@ -1,5 +1,4 @@
-.conteiner {
-    background-color: orange;
+.container {
     width: 50%;
     margin-top: 3rem;
     text-align: center;
@@ -11,4 +10,5 @@
 mat-card-actions{
     justify-content: center;
 }
+
 
