@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { PostInfoComponent } from "../post-Info/post-info.component";
 import { MatDialog} from '@angular/material/dialog';
 import { User } from "../user.model"; 
-import { Subscription } from "rxjs";
+import { Subscription, from } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { AuthService } from "../auth.services";
 
@@ -13,18 +13,12 @@ import { AuthService } from "../auth.services";
   })
 
 export class PostDialogComponent{
-
-  //currentUser: String | null = localStorage.getItem("userid");
-
+  
   constructor(public dialog:MatDialog, public authService: AuthService) {}
 
-  openDialogII(){
-    this.dialog.open(PostInfoComponent);
-  }
-
   users:User[] = [];
-  private userSub: Subscription;
 
+  private userSub: Subscription;
 
   ngOnInit(){
     this.authService.getUser();
@@ -53,7 +47,14 @@ export class PostDialogComponent{
       alert("Debes llenar los campos!")
       return
     }
-    this.authService.signUp(form.value.email, form.value.password, "admin").subscribe( res =>{
+
+    this.authService.signUp(form.value.email, 
+      form.value.password, 
+      form.value.nombre, 
+      form.value.apellido,
+      form.value.numero,
+      "admin").subscribe( res =>{
+        
       console.log(res)
       window.location.reload();
     },
@@ -66,5 +67,4 @@ export class PostDialogComponent{
     let usuario = localStorage.getItem("userid");
     return usuario;
   }
-
 }

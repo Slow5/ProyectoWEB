@@ -1,19 +1,15 @@
-.conteiner {
-  width: 80%;
+.container {
+  width: 95%;
   margin: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
+
   .example-card {
-    max-width: 500px;
+    width: 95%;
     background: white;
     border: 1px solid black;
     border-radius: 5px;
   }
 
-  .example-header-image {
-    background-image: url('https://scontent.fntr10-2.fna.fbcdn.net/v/t39.30808-6/396053736_821339656663353_6118996697743166126_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PF7swDLcokEAX86gTWx&_nc_ht=scontent.fntr10-2.fna&oh=00_AfCGRDVsfp9kapIkfQT_gbzjJosXOy1tvgqH4W1133lukg&oe=6542E3C5');
-    background-size: cover;
-  }
   

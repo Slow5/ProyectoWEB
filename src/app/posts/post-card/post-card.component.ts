@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {OnDestroy} from "@angular/core"
+import { OnDestroy } from "@angular/core"
 import { Subscription } from "rxjs";
 import { Post } from "../post.model"; 
 import { PostService } from "../posts.service";
@@ -13,14 +13,15 @@ import { PostService } from "../posts.service";
 export class PostCardComponent implements OnInit, OnDestroy{
 
   posts:Post[] = [];
-  
   private postSub: Subscription;
+  isLoading = false;
 
   constructor(public postService: PostService){}
   
   ngOnInit(){
     this.postService.getPosts();
     this.postSub = this.postService.getPostsUpdateListerner().subscribe((posts: Post[]) =>{
+      this.isLoading = false;
       this.posts = posts;
     });
   }
@@ -44,22 +45,4 @@ export class PostCardComponent implements OnInit, OnDestroy{
     this.postSub.unsubscribe();
   }
 
-  /*
-  ngOnInit(){
-    this.posts = this.postService.getPosts();
-    this.postSub = this.postService.getPostsUpdateListerner().subscribe((posts: Post[]) =>{
-      this.posts = posts;
-    });
-  }
-  ngOnDestroy(){
-    this.postSub.unsubscribe();
-  }
-
-  eliminarElemento(post:any): void {
-   const index = this.posts.indexOf(post);
-    if(index != -1){
-      this.posts.splice(index, 1);
-    }
-    this.postService.deletePost(index);
-  } */
 }

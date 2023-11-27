@@ -1,0 +1,26 @@
+.container{
+    padding: 20px;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    max-height: 1000px;
+}
+
+button{
+    width: 100%;
+    padding: 20px;
+}
+
+.example-card {
+    padding: 10px;
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.boton{
+    padding: 5px;
+    width: 100%;
+    max-width: 1000px;
+}

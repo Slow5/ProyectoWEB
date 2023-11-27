@@ -3,6 +3,7 @@ import { Post } from "./post.model";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map } from 'rxjs'
+import { Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 
@@ -11,8 +12,12 @@ export class PostService {
     private posts: Post[] = []; //Primer matriz
     private postUpdate = new Subject<Post[]>();
 
-    constructor(private http: HttpClient){
-
+    constructor(private http: HttpClient, private router: Router){}
+    
+    getPost(id:string){
+        return this.http.get<{_id:string, title:string, content:string, imagePath: string}>(
+            "http://localhost:3000/api/posts/" + id
+        );
     }
 
     getPosts(){
@@ -23,7 +28,8 @@ export class PostService {
                 return{
                     title: post.title,
                     content: post.content,
-                    id: post._id
+                    id: post._id, 
+                    imagePath: post.imagePath
                 }
             })
         }))
@@ -38,55 +44,79 @@ export class PostService {
         return this.postUpdate.asObservable();
     }
 
-    addPost(title:string, content: string){
-        const post: Post = {
-            id: null, 
-            title: title, 
-            content: content
-        };
+    addPost(title:string, content: string, image: File){
+        
+        const postData = new FormData();
 
-        this.http.post<{message:string}>('http://localhost:3000/api/posts', post).subscribe((ResponseData) =>{
-            console.log(ResponseData.message);
+        postData.append("title", title);
+        postData.append("content", content);
+        postData.append("image", image, title); 
+
+        this.http.post<{message:string, post: Post}>('http://localhost:3000/api/posts', postData)
+        .subscribe((ResponseData) =>{
+
+            const post: Post = {
+                id: ResponseData.post.id, 
+                title: title, 
+                content: content,
+                imagePath: ResponseData.post.imagePath
+            };
+
             this.posts.push(post);
             this.postUpdate.next([...this.posts]);
+            
         });
     }
     
     deletePost(postId: string){
         this.http.delete("http://localhost:3000/api/posts/" + postId)
         .subscribe(()=>{
-            console.log('Eliminado')
-            this.postUpdate.next([...this.posts]);
-            this.getPosts();
+            const updatePost = this.posts.filter(post => post.id !== postId);
+            this.posts = updatePost;
+            this.postUpdate.next([...this.posts])
         });
     }
 
-    /*
-    private posts: Post[] = []; //Primer matriz
-    
-    private postUpdate = new Subject<Post[]>();
-
-    getPosts(){
-        return [...this.posts]; //segunda matriz
-    }
-
-    getPostsUpdateListerner(){
-        return this.postUpdate.asObservable();
-    }
-
-    addPost(title:string, content: string){
-        const post: Post = {
-            title: title, 
-            content: content
-        }
+    updatePost(id: string, title: string, content: string, image: File | string){
+        //const post: Post = { id: id, title: title, content: content};
         
-        this.posts.push(post);
-        this.postUpdate.next([...this.posts]);
-    }
+        let postData;
+        
+        if(typeof image === "object"){
 
-    deletePost(index:any){
-        this.posts.splice(index, 1);
-    }*/
+            postData = new FormData();
+            
+            postData.append("id", id);
+            postData.append("title", title);
+            postData.append("content", content);
+            postData.append("image", image, title);
+
+        }else {
+            const postData = {
+                id:id,
+                title: title,
+                content: content, 
+                imagePath: image
+            };
+        }
+
+        this.http.put("http://localhost:3000/api/posts/" + id, postData)
+        .subscribe(response =>{
+            const updatePost = [...this.posts];
+            const oldPostIndex = updatePost.findIndex(p => p.id === id);
+            const post: Post = {
+                id: id, 
+                title: title, 
+                content: content, 
+                imagePath: ""
+            }
+
+            updatePost[oldPostIndex] = post;
+            this.posts = updatePost;
+            this.postUpdate.next([...this.posts]); 
+            this.router.navigate(["/"]);
+        });
+    }
 }
 
     

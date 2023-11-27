@@ -2,21 +2,44 @@
     <h3>Danos tu opinion</h3>
     <hr>
     <br>
-
-    <form class="example-form" (submit)="onAddPost(postForm)" #postForm="ngForm">
+    
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form class="example-form" [formGroup]="form" (submit)="onAddPost()" *ngIf="!isLoading">
       
         <mat-form-field class="example-full-width">
 
           <mat-label>¿Nos visitarias?</mat-label>
-          <input matInput placeholder="Si, No, Talvez" name ="title" ngModel required #title="ngModel">
-        
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>¿Por que?</mat-label>
-          <textarea matInput placeholder="Ex. Me encatan las hambuerguesas" name="content" ngModel required #content="ngModel"></textarea>
+          
+          <input matInput 
+          placeholder="Si, No, Talvez" 
+          formControlName="title" 
+          type="text"
+          required>
+          <mat-error *ngIf="form.get('title').invalid">Por favor ingrese un titulo</mat-error>
         </mat-form-field>
 
+        <mat-form-field class="example-full-width">
+          <mat-label>¿Por que?</mat-label>
+          <textarea 
+          matInput 
+          placeholder="Ex. Me encatan las hambuerguesas"
+          required 
+          formControlName="content">
+          </textarea>
+          <mat-error *ngIf="form.get('content').invalid">Por favor ingrese algun contenido</mat-error>
+        </mat-form-field>
+        
+          <div>
+            <button mat-stroked-button type="button" (click)="filePicker.click()" style="width: 100%; background-color: black;">Sube una foto de tu experiencia</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
+          </div>
+        
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+          <img [src]="imagePreview" [alt]="form.value.title" width="100%" height="300px" style="padding: 5px; border-radius: 5px;">
+        </div>
+      
         <button style="width: 100%;" mat-raised-button type="submit">Publicar</button> 
       </form>
 </div>
+
+

@@ -1,0 +1,28 @@
+    <mat-card>
+        <form [formGroup]="form" (submit)="onAddPost()">
+            <mat-form-field>
+                <input matInput type="text" placeholder="Titulo" formControlName ="nombre"> 
+                <mat-error *ngIf="form.get('nombre').invalid">Por favor ingrese un titulo</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="text" placeholder="Titulo" formControlName ="apellido"> 
+                <mat-error *ngIf="form.get('apellido').invalid">Por favor ingrese un titulo</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="text" placeholder="Titulo" formControlName ="numero"> 
+                <mat-error *ngIf="form.get('numero').invalid">Por favor ingrese un titulo</mat-error>
+            </mat-form-field>
+
+        <div>
+            <button mat-stroked-button type="button" (click)="filePicker.click()" style="width: 100%;">Seleccionar una imagen</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
+        </div>
+        
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+            <img [src]="imagePreview" [alt]="form.value.title" width="100%" height="500px">
+        </div>   
+            <button  mat-raised-button color="primary" type="submit" style="width: 100%;">Guardar</button> 
+        </form>
+    </mat-card>

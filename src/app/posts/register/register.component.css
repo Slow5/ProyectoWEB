@@ -1,7 +1,6 @@
-.conteiner {
-    background-color: orange;
-    width: 50%;
-    margin-top: 3rem;
+.container {
+    width: 75%;
+    padding: 10px;
     text-align: center;
     margin-bottom: auto;
     margin-left: auto;
@@ -16,4 +15,8 @@ mat-card-header{
     justify-content: center;
     margin: 10px;
     color: black;
+}
+
+mat-form-field{
+    width: 90%;
 }

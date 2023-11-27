@@ -1,0 +1,16 @@
+main {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.usuario{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px;
+    text-align: center;
+    background-color: orange;
+    border-radius: 5px;
+}

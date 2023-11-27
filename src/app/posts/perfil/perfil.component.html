@@ -1,0 +1,30 @@
+<div class="container">
+
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Datos del Usuario</mat-card-title>
+          <mat-card-subtitle>{{usuario}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Nombre del Usuario: {{nombre}}</p>
+          <p>Apellido del Usuario:{{apellido}}</p>
+          <p>Telefono : {{telefono}}</p>
+          <p>Correo: {{correo}}</p>
+        </mat-card-content>
+
+        <!-- 
+          <div class="post-image" style="text-align: center;">
+          <img [src]="post.image"style="border-radius: 5px; width: 50%; margin: auto; height: 250px;">
+        </div>
+        -->
+      
+      </mat-card>
+
+      <div class="boton">
+        <button mat-raised-button (click)="onDelete()" >Eliminar cuenta</button>
+      </div>
+
+      <div class="boton">
+        <button mat-raised-button [routerLink]="['/edit', customData]">Editar cuenta </button>
+      </div>
+</div>

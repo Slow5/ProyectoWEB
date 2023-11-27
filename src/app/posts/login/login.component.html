@@ -1,17 +1,12 @@
   <div class="container">
     <mat-card>
       <mat-card-content>
-        <h2>Login</h2>
+        <h1 style="color: orange; width: 100%;">Login</h1>
   
-        <form (submit)="logIn(login)" 
-        (submit)="logTypeIn(login)" 
-        (submit)="logIdIn(login)"
-        #login="ngForm">
+        <form (submit)="logIn(login)" (submit)="logTypeIn(login)" (submit)="logIdIn(login)" #login="ngForm">
         
           <mat-form-field>
-            <input matInput placeholder="Nombre de usuario" ngModel required name="email" 
-            type="text" 
-            #email="ngModel">
+            <input matInput placeholder="Nombre de usuario" ngModel required name="nombre" type="text" #nombre="ngModel">
           </mat-form-field>
           <br>
           <mat-form-field>
@@ -19,11 +14,14 @@
           </mat-form-field>
   
           <mat-card-actions>
+            
             <button mat-button type="submit">Iniciar sesión</button>
             <button mat-button routerLink="/register">Registrarse</button>
+
           </mat-card-actions>
         </form>
-  
+
+        <button mat-button (click)="generarPDF(login)">Generar PDF</button>
       </mat-card-content>
     </mat-card>
   </div>

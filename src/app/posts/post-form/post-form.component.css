@@ -13,3 +13,7 @@
     padding: 10px;
     background: white;
 }
+
+input[type = "file"]{
+  visibility:hidden;
+}

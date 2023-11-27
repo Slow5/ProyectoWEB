@@ -39,8 +39,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
 
 import { PostService } from './posts/posts.service';
 import { LoginComponent } from './posts/login/login.component';
-import { ConteinerComponent } from './posts/conteiner/conteiner.component';
+import { ConteinerComponent } from './posts/container/conteiner.component';
 import { RegisterComponent } from './posts/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
+import { PrComponent } from './posts/pr/pr.component';
+import { PerfilComponent } from './posts/perfil/perfil.component';
+import { BorrarComponent } from './posts/borrar/borrar.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,10 @@ import { RegisterComponent } from './posts/register/register.component';
     PostGaleryComponent,
     LoginComponent,
     ConteinerComponent,
-    RegisterComponent
+    RegisterComponent,
+    PrComponent,
+    PerfilComponent,
+    BorrarComponent
     
   ],
   imports: [
@@ -82,7 +90,9 @@ import { RegisterComponent } from './posts/register/register.component';
     FormsModule, 
     MatGridListModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     PostService,

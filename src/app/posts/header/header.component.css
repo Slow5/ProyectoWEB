@@ -1,11 +1,12 @@
-img {
-    margin: 25px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-}
-
 button {
     margin-left: 10px;
 }
 
+.spacer {
+    flex: 1; /* Esto expandirá el espacio entre el título y el icono para ocupar todo el espacio disponible */
+  }
+  
+  mat-toolbar{
+    border-radius: 50px;
+  }
+  

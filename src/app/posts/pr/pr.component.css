@@ -1,0 +1,17 @@
+.container{
+    width: 90%;
+    max-width: 1000px;
+    padding: 10px;
+    text-align: center;
+    height: 500px;
+    max-height: 1000px;
+}
+
+button{
+    width: 100%;
+    background-color: grey;
+}
+
+mat-form-field{
+    width: 100%;
+}

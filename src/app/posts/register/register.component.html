@@ -1,23 +1,45 @@
-<div class="conteiner">
+<div class="container">
   <mat-card>
-    <mat-card-header>
+
+    <mat-card-header style="width: 100%; color: orange;">
       <mat-card-title>Registrarse</mat-card-title>
     </mat-card-header>
+    
     <mat-card-content>
+      
       <form (submit)="SignUp(login)" #login="ngForm">
         <mat-form-field>
-          <input matInput placeholder="Nombre de usuario" ngModel required name="email" type="text" #email="ngModel">
+
+          <input matInput placeholder="Correo" ngModel required name="email" type="text" #email="ngModel">
           <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
-        <br>
+        
         <mat-form-field>
           <input matInput type="password" placeholder="Contraseña" ngModel required name="password" type="password" #password="ngModel">
           <mat-error *ngIf="password.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Nombre de usuario" ngModel required name="nombre" type="text" #nombre="ngModel">
+          <mat-error *ngIf="nombre.invalid">Ingresa un dato</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="Apellido de usuario" ngModel required name="apellido" type="text" #apellido="ngModel">
+          <mat-error *ngIf="apellido.invalid">Ingresa un dato</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Numero de telefono" ngModel required name="numero" type="text" #numero="ngModel">
+          <mat-error *ngIf="numero.invalid">Ingresa un dato</mat-error>
+        </mat-form-field>
+
         <mat-card-actions>
           <button mat-button type="submit">Iniciar</button>
         </mat-card-actions>
       </form>
+      
     </mat-card-content>
+    
   </mat-card>
 </div>

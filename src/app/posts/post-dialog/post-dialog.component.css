@@ -1,7 +1,6 @@
-.conteiner {
+.container {
     padding: 50px;
-    margin: auto;
-    width: 80%;
+    width: 100%;
     height: auto;
     justify-content: center;
 }
@@ -14,15 +13,16 @@
 h2,h3 {
     padding: 15px;
     font-family: 'Courier New', Courier, monospace;
-    background: orange; 
     font-weight: bold;
 }
-
+mat-form-field{
+    width: 100%;
+}
 .admin{
     margin-top: 10px;
     border: black 1px solid;
-    padding: 50px;
-    width: 50%;
+    padding: 25px;
+    width: 100%;
     margin: auto;
     text-align: center;
 }
