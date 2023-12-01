@@ -1,22 +1,36 @@
     <mat-card>
+        
+        <h2>Editar Usuario</h2>
+
         <form [formGroup]="form" (submit)="onAddPost()">
+            
             <mat-form-field>
-                <input matInput type="text" placeholder="Titulo" formControlName ="nombre"> 
-                <mat-error *ngIf="form.get('nombre').invalid">Por favor ingrese un titulo</mat-error>
+                <input matInput type="text" placeholder="Nombre" formControlName ="nombre"> 
+                <mat-error *ngIf="form.get('nombre').invalid">Por favor ingrese un nombre</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="text" placeholder="Titulo" formControlName ="apellido"> 
-                <mat-error *ngIf="form.get('apellido').invalid">Por favor ingrese un titulo</mat-error>
+                <input matInput type="text" placeholder="Apellido" formControlName ="apellido"> 
+                <mat-error *ngIf="form.get('apellido').invalid">Por favor ingrese un apellido</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="text" placeholder="Titulo" formControlName ="numero"> 
-                <mat-error *ngIf="form.get('numero').invalid">Por favor ingrese un titulo</mat-error>
+                <input matInput type="text" placeholder="Numero" formControlName ="numero"> 
+                <mat-error *ngIf="form.get('numero').invalid">Por favor ingrese un numero</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nueva Contraseña" formControlName ="password"> 
+                <mat-error *ngIf="form.get('password').invalid">Por favor ingrese una contraseña</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput type="text" placeholder="Confirmar Contraseña" formControlName ="passwordDos"> 
+                <mat-error *ngIf="form.get('passwordDos').invalid">Por favor ingrese una contraseña</mat-error>
             </mat-form-field>
 
         <div>
-            <button mat-stroked-button type="button" (click)="filePicker.click()" style="width: 100%;">Seleccionar una imagen</button>
+            <button mat-stroked-button color="primary" type="button" (click)="filePicker.click()" style="width: 100%;">Seleccionar una imagen</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
         </div>
         

@@ -40,6 +40,7 @@ const router = express.Router();
 router.post('/signup', async (req, res) =>{
     const {email, password,nombre,apellido,numero, usertype} = req.body;
     const newUser = new User({email, password, nombre, apellido, numero, usertype});
+
     await newUser.save();
 
     const token = jwt.sign({_id: newUser._id }, 'secretkey')
@@ -128,12 +129,12 @@ router.get('/users/:id', (req, res, next)=>{
     User.findById(req.params.id).then(post =>{
         if(post){
             res.status(200).json(post);
-            console.log('actualizacion')
         }else{
             res.status(404).json({message: 'Post no encontrado'});
         }    
     });    
 });
+
 
 router.put("/users/:id", multer({storage:storage}).single("image"), (req,res, next)=>{
 
@@ -145,14 +146,14 @@ router.put("/users/:id", multer({storage:storage}).single("image"), (req,res, ne
     }
 
     const user = new User({
-        //_id: req.body.id,
+        _id: req.body.id,
         email: req.body.email, 
         password: req.body.password, 
-        apellido: req.body.apellido,
         nombre: req.body.nombre, 
+        apellido: req.body.apellido,
         numero: req.body.numero,
-        image: imagePath, 
-        usertype: req.body.usertype
+        usertype: req.body.usertype,
+        image: imagePath
     });
     
     User.updateOne({_id: req.params.id}, user).then (result=>{
@@ -199,7 +200,6 @@ router.get('/user', (req, res, next)=>{
     });    
 });
 
-
 router.post('/getUser', async (req, res) => {
     try {
         const { email } = req.body;
@@ -238,7 +238,7 @@ router.delete("/deleteuser/:id", (req,res,next)=>{
 router.post('/enviar-correo', async (req, res) => {
     try {
       const { email, clave} = req.body;
-
+      
       if (!email) {
         return res.status(400).json({ error: 'No se proporcionó una dirección de correo electrónico.' });
       }
@@ -255,11 +255,11 @@ router.post('/enviar-correo', async (req, res) => {
       })
 
       const info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <foo@example.com>',
+        from: '"Codigo de Verificacion" <foo@example.com>',
         to: email,
-        subject: clave,
-        text: "hola",
-        html: "<b>Codigo de Verificacion</b>", // html body
+        subject: "Codigo de Verificacion",
+        text: clave,
+        //html: "<b>Codigo de Verificacion</b>", // html body
       });
   
       console.log('Correo enviado:', info.messageId);
@@ -269,6 +269,42 @@ router.post('/enviar-correo', async (req, res) => {
       res.status(500).json({ error: 'Error al enviar el correo' });
     }
   });
+
+
+  router.post('/correo-id', async (req, res) => {
+    try {
+      const {email}  = req.body;
+      const user = await User.findOne({email})
+
+      if (!user || !user.email) {
+        return res.status(400).json({ error: 'No se proporcionó una dirección de correo electrónico.' });
+      }
+      
+      const transporter = nodemailer.createTransport({
+        pool: true,
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, 
+        auth: {
+          user: 'eduareyesdo567@gmail.com',
+          pass: 'fgmt xdbr odfn kfuu',
+        },
+      })
+
+      const info = await transporter.sendMail({
+        from: '"Recuperacion de Contraseña" <foo@example.com>',
+        to: user.email,
+        subject:"Recuperacion de Contraseña",
+        text: "Tu contraseña es: " + user.password,
+      });
   
+      console.log('Correo enviado:', info.messageId);
+      res.status(200).json({ mensaje: 'Correo enviado con éxito' });
+
+    } catch (error) {
+      console.error('Error al enviar el correo:', error.message);
+      res.status(500).json({ error: 'Error al enviar el correo' });
+    }
+  });
 
 module.exports = router

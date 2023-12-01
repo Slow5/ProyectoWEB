@@ -10,7 +10,7 @@
       <form (submit)="SignUp(login)" #login="ngForm">
         <mat-form-field>
 
-          <input matInput placeholder="Correo" ngModel required name="email" type="text" #email="ngModel">
+          <input matInput placeholder="Correo" ngModel required name="email" type="email" #email="ngModel">
           <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
         

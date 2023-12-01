@@ -46,6 +46,7 @@ import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-s
 import { PrComponent } from './posts/pr/pr.component';
 import { PerfilComponent } from './posts/perfil/perfil.component';
 import { BorrarComponent } from './posts/borrar/borrar.component';
+import { RecuperarComponent } from './posts/recuperar/recuperar.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { BorrarComponent } from './posts/borrar/borrar.component';
     RegisterComponent,
     PrComponent,
     PerfilComponent,
-    BorrarComponent
+    BorrarComponent,
+    RecuperarComponent
     
   ],
   imports: [

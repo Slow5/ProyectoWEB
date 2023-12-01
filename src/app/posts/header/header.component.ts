@@ -33,10 +33,11 @@ export class HeaderComponent{
   validar(){
     let usuario = localStorage.getItem('usertype');
     let validar = false;
+
       if(usuario?.includes("admin")){
           validar = true;
       }else{
-        validar = false;
+          validar = false;
       }
       return validar;
   }

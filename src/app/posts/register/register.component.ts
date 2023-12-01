@@ -14,13 +14,15 @@ export class RegisterComponent {
   constructor (private authService: AuthService, private router: Router){}
 
   ngOnInit(){
+    
     const longitud = 5
 
     for(let i = 0; i<longitud;i++){
       const digito=Math.floor(Math.random()*10)
       this.clave += digito.toString()
     }
-    console.log(this.clave)  
+    console.log(this.clave) 
+     
   }
 
   SignUp(form: NgForm){

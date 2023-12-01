@@ -48,7 +48,6 @@ export class PrComponent {
         localStorage.removeItem("con")
 
         console.log(res)
-        //localStorage.setItem('token', res.token);
         this.router.navigate(['/login']);
       },
       err =>{

@@ -17,12 +17,16 @@
             
             <button mat-button type="submit">Iniciar sesión</button>
             <button mat-button routerLink="/register">Registrarse</button>
-
+            
           </mat-card-actions>
         </form>
 
-        <button mat-button (click)="generarPDF(login)">Generar PDF</button>
+        <button class="boton" mat-button routerLink="/recuperar">Recuperar contraseña</button>
+        
       </mat-card-content>
     </mat-card>
   </div>
 
+<!--
+        <button mat-button (click)="generarPDF(login)">Generar PDF</button>
+         -->

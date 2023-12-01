@@ -14,11 +14,13 @@ export class AuthService{
     
     private url = 'http://localhost:3000/api'
 
-    User ={}
+    User = {}
 
     Register = {}
     
     constructor(private http: HttpClient, private router: Router){}
+
+    
 
     getUsuario(id:string){
         return this.http.get<{_id:string, 
@@ -28,9 +30,17 @@ export class AuthService{
             apellido: string, 
             numero:string, 
             usertype:string, 
-            image: string}>(
+            image: string
+        }>(
             "http://localhost:3000/api/users/" + id
         );
+    }
+
+    getEmailId(email:string){
+        this.User = {
+            email: email
+        }
+        return this.http.post<{any}>("http://localhost:3000/api/correo-id/", this.User);
     }
 
     signUp(email:String, password:String,nombre: String, apellido: String, numero:String, usertype:String){
@@ -95,6 +105,7 @@ export class AuthService{
         localStorage.removeItem('apellido')
         localStorage.removeItem('nombre')
         localStorage.removeItem('token');
+        
         localStorage.removeItem('userid'); 
         localStorage.removeItem('usertype');
         localStorage.removeItem('contraseña');
@@ -109,7 +120,6 @@ export class AuthService{
 
     getUser(){
         this.http.get<{message: string, users: any}>('http://localhost:3000/api/user')
-        
         .pipe(map((userData)=>{
             return userData.users.map(users=> {
                 return{
@@ -149,7 +159,7 @@ export class AuthService{
 
     UpdateUser(id: string, email: string, password: string, 
         nombre: string, apellido: string, numero: string, 
-        image: File | string, usertype: string){
+         usertype: string,image: File | string){
         
         let postData;
         
@@ -174,9 +184,8 @@ export class AuthService{
                 apellido: apellido,
                 nombre: nombre,
                 numero: numero,
-                image: image,
                 usertype: usertype,
-                
+                image: image,
             };
         }
 
@@ -190,15 +199,35 @@ export class AuthService{
                 password: password,
                 apellido: apellido,
                 nombre: nombre,
-                numero: numero, 
-                image: "",
+                numero: numero,
                 usertype: usertype,
+                image: "",
             }
-
+            
             updatePost[oldPostIndex] = user;
             this.users = updatePost;
             this.userUpdate.next([...this.users]); 
             this.router.navigate(["/main"]);
+        });
+    }
+
+    getUsuarios(){
+        this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts')
+        .pipe(map((postData)=>{
+            return postData.posts.map(post=> {
+                return{
+                email:post.email,
+                password:post.password, 
+                nombre: post.nombre, 
+                apellido: post.apellido, 
+                numero: post.numero, 
+                usertype: post.usertype, 
+                image: post.image
+                }
+            })
+        })).subscribe((publicacionTrasnformada) => {
+            this.users = publicacionTrasnformada;
+            this.userUpdate.next([...this.users]);
         });
     }
 

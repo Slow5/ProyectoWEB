@@ -11,8 +11,7 @@
         <button mat-menu-item routerLink="/bebida" routerLinkActive="mat-accent" *ngIf="!validar()">Bebidas</button>
         <button mat-menu-item routerLink="/info" routerLinkActive="mat-accent" *ngIf="!validar()">Informacion</button>
         <button mat-menu-item routerLink="/publicacion" routerLinkActive="mat-accent" *ngIf="!validar()">Publicaciones</button>
-        <button mat-menu-item routerLink="/admin" routerLinkActive="mat-accent" *ngIf="validar()">Administrador</button>
-        <button mat-menu-item (click)="cerrar()" >Cerrar Sesion</button>
+        <button mat-menu-item routerLink="/admin" routerLinkActive="mat-accent" *ngIf="validar()">administrador</button>
     </mat-menu>
 
     <span class="spacer"></span>

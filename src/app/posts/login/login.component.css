@@ -15,3 +15,7 @@ mat-card-actions{
 mat-form-field {
     width: 100%;
 }
+
+.boton{
+    font-size: 10px;
+}

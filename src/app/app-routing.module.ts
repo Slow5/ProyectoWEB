@@ -13,6 +13,7 @@ import { PostDialogComponent } from './posts/post-dialog/post-dialog.component';
 import { PrComponent } from './posts/pr/pr.component';
 import { PerfilComponent } from './posts/perfil/perfil.component';
 import { BorrarComponent } from './posts/borrar/borrar.component';
+import { RecuperarComponent } from './posts/recuperar/recuperar.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,9 @@ const routes: Routes = [
   }, {
     path: 'edit/:userid',
     component: BorrarComponent     
+  },{
+    path: 'recuperar',
+    component: RecuperarComponent
   }
 ];
 

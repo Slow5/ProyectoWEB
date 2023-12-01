@@ -7,11 +7,13 @@
     <mat-accordion multi="true" *ngIf="users.length > 0">
       <mat-expansion-panel *ngFor="let user of users">
         <mat-expansion-panel-header>
-        <h5>Usuarios -</h5>
-         {{user.email}}
+        <h4>Usuarios: {{user.nombre}}</h4>
         </mat-expansion-panel-header>
-        <h5>Contraseña- </h5>
-        <p>{{user.password}}</p>
+        <h5>Tipo De usuario: {{user.usertype}}</h5>
+        <h5>Contraseña: {{user.password}}</h5>
+        <h5>Correo: {{user.email}}</h5>
+        <h5>Apellido: {{user.apellido}}</h5>
+        <h5>Numero: {{user.numero}}</h5>
         <mat-action-row>
           <button mat-button *ngIf="user.id != validarUsuario()" (click)="onDelete(user.id)" color="warn">Eliminar</button>
         </mat-action-row>
@@ -28,18 +30,20 @@
       <h3>Creacion de Admins</h3>
         <form (submit)="SignUp(login)" #login="ngForm">
         <mat-form-field>
-          <input matInput placeholder="Nombre de usuario" ngModel required name="email" type="text" #email="ngModel">
+          <input matInput placeholder="Correo" ngModel required name="email" type="text" #email="ngModel">
+          <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
           <input matInput type="password" placeholder="Contraseña" ngModel required name="password" type="password" #password="ngModel">
+          <mat-error *ngIf="password.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
         
         <mat-form-field>
           <input matInput placeholder="Nombre de usuario" ngModel required name="nombre" type="text" #nombre="ngModel">
-          <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
+          <mat-error *ngIf="nombre.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
-        
+        <!-- 
         <mat-form-field>
           <input matInput placeholder="Apellido de usuario" ngModel required name="apellido" type="text" #apellido="ngModel">
           <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
@@ -49,7 +53,7 @@
           <input matInput placeholder="Numero de telefono" ngModel required name="numero" type="text" #numero="ngModel">
           <mat-error *ngIf="email.invalid">Ingresa un dato</mat-error>
         </mat-form-field>
-
+        -->
         <mat-card-actions>
           <button mat-button color="primary" type="submit">Iniciar</button>
         </mat-card-actions>

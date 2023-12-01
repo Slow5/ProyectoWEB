@@ -34,7 +34,13 @@ export class BorrarComponent {
         'image': new FormControl(null, {
           validators: [Validators.required],
           asyncValidators: [mimeType]
-        })
+        }),
+        'password': new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(3)]
+        }), 
+        'passwordDos': new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(3)]
+        }), 
     });
 
     this.router.paramMap.subscribe((paramMap: ParamMap)=>{
@@ -59,13 +65,10 @@ export class BorrarComponent {
           };
          
           this.form.setValue({
-            //email: this.user.email,
-            //password: this.user.password,
             nombre: this.user.nombre, 
             apellido: this.user.apellido,
             numero: this.user.numero,
-            //usertype: this.user.usertype, 
-            image: this.user.image
+            image: this.user.image, 
           });
         });
       }else{
@@ -83,32 +86,29 @@ export class BorrarComponent {
     }
 
     if(this.mode == "create"){
-      //this.postService.add(this.form.value.title, this.form.value.content, this.form.value.image)
       alert("Campo no editado")
     }else{
+      console.log(this.form.value.password)
+      console.log(this.form.value.passwordDos)
 
-      alert("hola")
-
-      //this.userId = localStorage.getItem('userid')
-      
+      if(this.form.value.password == this.form.value.passwordDos){
+        alert("Campos Actualizados")
+     
       const email = localStorage.getItem('email')
-      const password = localStorage.getItem('contraseña')
       const usertype = localStorage.getItem('usertype')
       
-      this.postService.UpdateUser(
-      this.userId, 
-      email, 
-      password, 
-      this.form.value.nombre, 
-      this.form.value.apellido,
-      this.form.value.numero, 
-      usertype,
-      this.form.value.image
-        )
+      this.postService.UpdateUser(this.userId,email,this.form.value.password,this.form.value.nombre, 
+        this.form.value.apellido, this.form.value.numero, usertype, this.form.value.image)
+
+      }else if(this.form.value.password != this.form.value.passwordDos){
+        alert("Contraseñas Incorrectas")
+      }else{
+        alert("Error")
       }
+    } 
       this.form.reset();
     }
-
+  
   onImagePicked(event : Event){
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({image: file});

@@ -15,21 +15,29 @@ export class LoginComponent implements OnInit{
   constructor (private authService: AuthService, private router: Router){}
 
   ngOnInit(){
+
     localStorage.setItem('validar', "si")
+ 
   }
 
   logIn(form: NgForm){
+    
     if(form.invalid){
       alert("No ingreso datos");
       return;
     }
+
     this.authService.logIn(form.value.nombre, form.value.password).subscribe( res =>{
       console.log(res)
-
+      
       localStorage.setItem('token', res.token);
       localStorage.removeItem('validar');
       this.router.navigate(['/main']);
-    
+
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+
     },
     err =>{
       console.log(err)
@@ -49,9 +57,12 @@ export class LoginComponent implements OnInit{
   logIdIn(form: NgForm){
     this.authService.getUserId(form.value.nombre, form.value.password).subscribe( res =>{
       console.log(res)
+
+      
       localStorage.setItem('userid', res.id);
       localStorage.setItem('usuario', res.nom);
-      localStorage.setItem('gmail', res.gmail)
+      localStorage.setItem('gmail', res.gmail);
+
     },
     err =>{
       console.log(err)
@@ -76,7 +87,6 @@ export class LoginComponent implements OnInit{
       <p><strong>Apellido:</strong> ${form.value.password}</p>
     </div>
   `;
-
     html2pdf().from(element).set(options).outputPdf();
   }
 

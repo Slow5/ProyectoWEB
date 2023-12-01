@@ -17,6 +17,8 @@ export class PerfilComponent {
 
   customData: any;
 
+  user:User[] = []
+  
   constructor(private authService: AuthService){}
   
   ngOnInit(){
@@ -28,7 +30,10 @@ export class PerfilComponent {
     this.correo = localStorage.getItem('email')
     this.telefono = localStorage.getItem('numero')
     this.usuario = localStorage.getItem('usertype')
+  }
 
+  cerrar(){
+    this.authService.logOut();
   }
 
   onDelete(){

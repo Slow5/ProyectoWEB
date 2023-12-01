@@ -1,0 +1,19 @@
+input[type = "file"]{
+    visibility:hidden;
+}
+
+mat-form-field, input{
+    width: 100%;
+}
+
+h2{
+    text-align: center;
+}
+
+mat-card{
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+}
