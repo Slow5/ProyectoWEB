@@ -14,7 +14,7 @@ export class PerfilComponent {
   correo: string
   telefono: string
   usuario: string
-
+  imagen: string
   customData: any;
 
   user:User[] = []
@@ -30,6 +30,8 @@ export class PerfilComponent {
     this.correo = localStorage.getItem('email')
     this.telefono = localStorage.getItem('numero')
     this.usuario = localStorage.getItem('usertype')
+    this.imagen = localStorage.getItem('image')
+    
   }
 
   cerrar(){

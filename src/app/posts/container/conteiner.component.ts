@@ -26,6 +26,7 @@ export class ConteinerComponent implements OnInit{
     const usuario = localStorage.getItem('gmail')
 
     console.log('UserID:', usuario);
+
     this.auth.getUsers({email: usuario}).subscribe(
       (res: any) =>{
       if (res) {
@@ -33,6 +34,7 @@ export class ConteinerComponent implements OnInit{
         localStorage.setItem('apellido', res.apellido);
         localStorage.setItem('numero', res.numero);
         localStorage.setItem('nombre', res.nom);
+        localStorage.setItem('image', res.image);
       } else {
         console.error('Datos de usuario no válidos:', res);
       } 

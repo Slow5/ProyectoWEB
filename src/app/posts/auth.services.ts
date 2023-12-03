@@ -20,8 +20,6 @@ export class AuthService{
     
     constructor(private http: HttpClient, private router: Router){}
 
-    
-
     getUsuario(id:string){
         return this.http.get<{_id:string, 
             email:string, 
@@ -129,7 +127,7 @@ export class AuthService{
                     apellido: users.apellido,
                     nombre: users.nombre,
                     numero: users.numero,
-                    image: null,
+                    image: users.image,
                     usertype: users.usertype
                 }
             })

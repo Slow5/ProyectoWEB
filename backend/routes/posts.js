@@ -233,8 +233,9 @@ router.post('/getUser', async (req, res) => {
         const numero = user.numero
         const password = user.password
         const tipo = user.usertype
+        const image = user.image
 
-        res.status(200).json({id, gmail, password, nom, apellido,numero, tipo});
+        res.status(200).json({id, gmail, password, nom, apellido,numero, tipo, image});
 
     } catch (error) {
         console.error(error);

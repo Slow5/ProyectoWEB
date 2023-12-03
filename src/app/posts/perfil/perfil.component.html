@@ -7,6 +7,10 @@
           <mat-card-subtitle>{{usuario}}</mat-card-subtitle>
         </mat-card-header>
 
+        <div class="post-image" style="text-align: center;">
+          <img [src]="imagen"style="border-radius: 5px; width: 50%; margin: auto; height: 250px;">
+        </div>
+
         <mat-card-content>
           <p>Nombre del Usuario: {{nombre}}</p>
           <p>Apellido del Usuario:{{apellido}}</p>
@@ -14,14 +18,6 @@
           <p>Correo: {{correo}}</p>
         </mat-card-content>
 
-
-        <!--
-<div class="post-image" style="text-align: center;">
-          <img [src]="post.image"style="border-radius: 5px; width: 50%; margin: auto; height: 250px;">
-        </div>
-         -->
-        
-        
       </mat-card>
 
       <div class="boton">
