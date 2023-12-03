@@ -7,7 +7,7 @@
     <mat-accordion multi="true" *ngIf="users.length > 0">
       <mat-expansion-panel *ngFor="let user of users">
         <mat-expansion-panel-header>
-        <h4>Usuarios: {{user.nombre}}</h4>
+        <h4>{{user.nombre}}</h4>
         </mat-expansion-panel-header>
         <h5>Tipo De usuario: {{user.usertype}}</h5>
         <h5>Contraseña: {{user.password}}</h5>

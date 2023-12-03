@@ -1,34 +1,10 @@
-import { Component } from "@angular/core";
-
-export interface PeriodicElement {
-  Hambuerguesa: string;
-  Ingredientes: string;
-  Precio: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {Hambuerguesa: 'CLASICA DE LA CASA', Ingredientes: 'Carne 100% de Diezmillo, mezclada con trozos de Tocino, Queso Americano, Lechuga, Jitomate, Cebolla y Pepinillos', Precio: 125},
-  {Hambuerguesa: 'CLASICA DOBLE CARNE', Ingredientes: 'Disfrutala con Doble Porcion de Carne', Precio: 155},
-  {Hambuerguesa: 'A LA BBQ', Ingredientes: 'Carne 100% de Diezmillo, Bañada en Salsa Bbq, Tocino, Queso Chedar, Cebolla Glasiada(Aros de Cabolla Opcional)', Precio: 130},
-  {Hambuerguesa: 'BUFFALO RANCH', Ingredientes: 'Tenders de Pollo bañadas en salsa Buffalo, un toque de nuestro aderezo Ranch, Queso Chedar, Lechuga, Cebolla, Jitomate y Pepinillo', Precio: 130},
-  {Hambuerguesa: 'CRISPY CHICKEN', Ingredientes: 'Tenders de Pollo, Queso Americano, Lechuga, Jitomate, Cebolla y Pepinillo', Precio: 125},
-  {Hambuerguesa: 'HONEY MUSTARD', Ingredientes: 'Tenders de Pollo Bañado en Salsa Honey Mustard, Queso Americano, Lechuga, Jitomate, Cebolla y Pepinillo', Precio: 130},
-];
-
-export interface Elemento {
-  Hambuerguesa: string;
-  Ingredientes: string;
-  Precio: number;
-}
-
-const DATA: Elemento[] = [
-  {Hambuerguesa: 'NACHOS', Ingredientes: 'BAÑADAS EN QUESO CHEDAR, EXQUISITOS PICO DE GALLO Y JALAPEÑOS', Precio: 85},
-  {Hambuerguesa: 'OREDEN DE PAPAS', Ingredientes: 'A LA FRANCESA, SAZONADAS CON SAL Y PARMESANO', Precio: 80},
-  {Hambuerguesa: 'PAPAS BBQ HOUSE', Ingredientes: 'A LA FRANCESA, BAÑADAS EN QUESO CHEDAR, TROZOS DE TOCINO Y UN TOQUE DE PEREJIL', Precio: 85},
-  {Hambuerguesa: 'PAPAS BUFFALO RANCH', Ingredientes: 'A LA FRANCESA BAÑADAS EN SALSA BUFFALO Y ADEREZO RANCHO, QUESO JACK Y UN TOQUE DE PEREJIL', Precio: 95},
-  {Hambuerguesa: 'PAPAS DE ASADA', Ingredientes: 'Tenders de Pollo, Queso Americano, Lechuga, Jitomate, Cebolla y Pepinillo', Precio: 120},
-  {Hambuerguesa: 'PAQUE COMPARTAS', Ingredientes: '6 BONELESS, 4 DEDOS DE QUESO, 6 AROS DE CEBOLLA Y PAPAS A LA FRANCESA CON 2 ADEREZOS DE TU ELECCION', Precio: 220},
-];
+import { Component, LOCALE_ID, OnInit } from "@angular/core";
+import { MenuService } from "../menu.service";
+import { Menu } from "../menu.model";
+import { Subscription } from "rxjs";
+import { NgForm } from "@angular/forms";
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
     selector: 'app-menu',
@@ -36,10 +12,75 @@ const DATA: Elemento[] = [
     styleUrls: ['./post-menu.component.css']
   })
 
-export class PostMenuComponent{
-  displayedColumns: string[] = ['Hamburguesa', 'Ingredientes', 'Precio'];
-  dataSource = ELEMENT_DATA;
+export class PostMenuComponent implements OnInit{
+  
+  user:string
 
-  Columns: string[] = ['Hamburguesa', 'Ingredientes', 'Precio'];
-  dataSourceII = DATA;
+  titulo: string
+  descripcion: string
+  precio: string
+
+  valida: string
+
+  menus:Menu[] = [];
+
+  private menuSub: Subscription;
+
+  constructor(private menuService: MenuService){}
+  
+  ngOnInit(){
+    this.user = localStorage.getItem('usuario')
+    this.menuService.getMenus();
+    this.menuSub = this.menuService.getMenuUpdateListerner().subscribe((menus: Menu[]) =>{
+      this.menus = menus;
+    });
+  }
+
+  enviarPedido(pedido:NgForm) {
+
+    if(pedido.value.pedido == ""){
+      alert("llenar campos")
+    }else{
+      this.titulo = localStorage.getItem('nombre')
+      this.precio = localStorage.getItem('apellido')
+      
+      localStorage.setItem('plato', this.titulo)
+      localStorage.setItem('contenido',pedido.value.pedido)
+
+      this.descripcion = pedido.value.pedido
+    
+      console.log('Pedido enviado:', this.precio);
+    
+      console.log('Pedido enviado:', this.titulo);
+
+      this.menuService.getPedido(this.titulo, this.descripcion, this.precio).subscribe(menu => {
+        alert("Pedido Enviado")
+        pedido.reset();
+      });
+    }
+  }
+
+  generatePDF() {
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+    const titulo = localStorage.getItem('plato');
+    const contenido = localStorage.getItem('contenido')
+
+    const contenidoPDF = `Usuario: ${titulo}\n\nContenido: ${contenido}`;
+
+    const documentDefinition = {
+      content: [
+        { text: titulo, style: 'titulo' },
+        { text: contenidoPDF, style: 'contenido' }
+      ],
+      styles: {
+        titulo: { fontSize: 14, bold: true, margin: [0, 0, 0, 10] },
+        contenido: { fontSize: 12 }
+      }
+    };
+
+    pdfMake.createPdf(documentDefinition).open();
+    //pdfMake.createPdf(documentDefinition).download('generar.pdf');
+  }
+
 }

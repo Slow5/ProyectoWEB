@@ -17,6 +17,8 @@ export class PostFormComponent{
   enteredTitle = ""
   entederContent = ""
 
+  usuario: string
+
   form: FormGroup;
   imagePreview: string;
 
@@ -57,7 +59,8 @@ export class PostFormComponent{
             id: postData._id, 
             title: postData.title, 
             content: postData.content, 
-            imagePath: postData.imagePath
+            imagePath: postData.imagePath,
+            usuario: localStorage.getItem('usuario') // Asegúrate de obtener el usuario correctamente
           };
          
           this.form.setValue({
@@ -82,7 +85,9 @@ export class PostFormComponent{
     this.isLoading = true;
     
     if(this.mode == "create"){
-      this.postService.addPost(this.form.value.title, this.form.value.content, this.form.value.image)
+      this.usuario = localStorage.getItem('usuario')
+      console.log(this.usuario)
+      this.postService.addPost(this.form.value.title, this.form.value.content, this.form.value.image, this.usuario)
     }else{
       this.postService.updatePost(
         this.postId, 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgIf } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,7 +41,7 @@ import { LoginComponent } from './posts/login/login.component';
 import { ConteinerComponent } from './posts/container/conteiner.component';
 import { RegisterComponent } from './posts/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
+import  {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PrComponent } from './posts/pr/pr.component';
 import { PerfilComponent } from './posts/perfil/perfil.component';
 import { BorrarComponent } from './posts/borrar/borrar.component';
@@ -84,7 +83,6 @@ import { RecuperarComponent } from './posts/recuperar/recuperar.component';
     MatTableModule,
     MatTreeModule,
     MatIconModule,
-    NgIf,
     MatProgressBarModule,
     MatCardModule,
     MatIconModule,

@@ -40,10 +40,5 @@ export class HeaderComponent{
           validar = false;
       }
       return validar;
-  }
-  
-  cerrar(){
-    this.authService.logOut();
-  }
-  
+  } 
 }

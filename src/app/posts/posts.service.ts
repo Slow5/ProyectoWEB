@@ -29,7 +29,8 @@ export class PostService {
                     title: post.title,
                     content: post.content,
                     id: post._id, 
-                    imagePath: post.imagePath
+                    imagePath: post.imagePath, 
+                    usuario: post.usuario
                 }
             })
         }))
@@ -44,27 +45,30 @@ export class PostService {
         return this.postUpdate.asObservable();
     }
 
-    addPost(title:string, content: string, image: File){
+    addPost(title:string, content: string, image: File, usuario: string){
         
         const postData = new FormData();
 
         postData.append("title", title);
         postData.append("content", content);
-        postData.append("image", image, title); 
+        postData.append("image", image, title);
+        postData.append("usuario:", usuario);
+        console.log(usuario) 
 
         this.http.post<{message:string, post: Post}>('http://localhost:3000/api/posts', postData)
         .subscribe((ResponseData) =>{
 
+            console.log(usuario) 
+            
             const post: Post = {
                 id: ResponseData.post.id, 
                 title: title, 
                 content: content,
-                imagePath: ResponseData.post.imagePath
+                imagePath: ResponseData.post.imagePath, 
+                usuario: usuario
             };
-
             this.posts.push(post);
             this.postUpdate.next([...this.posts]);
-            
         });
     }
     
@@ -108,9 +112,9 @@ export class PostService {
                 id: id, 
                 title: title, 
                 content: content, 
-                imagePath: ""
+                imagePath: "",
+                usuario: localStorage.getItem('usuario') // Asegúrate de obtener el usuario correctamente
             }
-
             updatePost[oldPostIndex] = post;
             this.posts = updatePost;
             this.postUpdate.next([...this.posts]); 

@@ -3,12 +3,10 @@
         <span>BBQ HOUSE</span>
     </h1>    
 
-    <button mat-button [matMenuTriggerFor]="menu" *ngIf="!mostrar()">Menu</button>
-    
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="!mostrar()">Navegacion</button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/main" routerLinkActive="mat-accent">Inicio</button>
-        <button mat-menu-item routerLink="/entrada" routerLinkActive="mat-accent" *ngIf="!validar()">Entradas</button>
-        <button mat-menu-item routerLink="/bebida" routerLinkActive="mat-accent" *ngIf="!validar()">Bebidas</button>
+        <button mat-menu-item routerLink="/entrada" routerLinkActive="mat-accent" *ngIf="!validar()">Menu</button>
         <button mat-menu-item routerLink="/info" routerLinkActive="mat-accent" *ngIf="!validar()">Informacion</button>
         <button mat-menu-item routerLink="/publicacion" routerLinkActive="mat-accent" *ngIf="!validar()">Publicaciones</button>
         <button mat-menu-item routerLink="/admin" routerLinkActive="mat-accent" *ngIf="validar()">administrador</button>

@@ -3,6 +3,8 @@ const multer = require('multer')
 
 const nodemailer = require('nodemailer')
 
+
+const Menu = require('../models/menu')
 const Post = require('../models/post')
 const User = require('../models/User')
 
@@ -66,10 +68,13 @@ router.post("/posts", multer({storage:storage}).single("image"),(req, res, next)
 
     const url = req.protocol + '://' + req.get("host");
 
+    console.log(req.body.usuario) 
+    
     const post = new Post({
         title: req.body.title, 
         content: req.body.content,
-        imagePath: url + "/images/" + req.file.filename
+        imagePath: url + "/images/" + req.file.filename, 
+        usuario: req.body.usuario
     }); 
     
     post.save().then(createdPost=>{
@@ -83,7 +88,6 @@ router.post("/posts", multer({storage:storage}).single("image"),(req, res, next)
     })
 });
 
-
 router.get('/posts', (req, res, next)=>{
     Post.find().then(document=>{
         res.status(200).json({
@@ -93,6 +97,17 @@ router.get('/posts', (req, res, next)=>{
     });    
 });
 
+//informacion del menu 
+router.get('/menu', (req, res, next)=>{
+    Menu.find().then(document=>{
+        res.status(200).json({
+            message: 'Publicaciones expuestas con exito', 
+            menu: document
+        });
+    });    
+});
+
+//borrar publicacion
 router.delete('/posts/:id', (req, res, next)=>{
         Post.deleteOne({_id: req.params.id}).then(result =>{
         console.log(result);
@@ -113,8 +128,10 @@ router.put("/:id", multer({storage:storage}).single("image"), (req,res, next)=>{
         _id: req.body.id,
         title:req.body.title,
         content: req.body.content,
-        imagePath: imagePath
+        imagePath: imagePath, 
+        usuario: req.body.usuario
     });
+
     Post.updateOne({_id: req.params.id}, post).then (result=>{
         console.log(result);
         res.status(200).json({
@@ -296,6 +313,37 @@ router.post('/enviar-correo', async (req, res) => {
         to: user.email,
         subject:"Recuperacion de Contraseña",
         text: "Tu contraseña es: " + user.password,
+      });
+  
+      console.log('Correo enviado:', info.messageId);
+      res.status(200).json({ mensaje: 'Correo enviado con éxito' });
+
+    } catch (error) {
+      console.error('Error al enviar el correo:', error.message);
+      res.status(500).json({ error: 'Error al enviar el correo' });
+    }
+  });
+  //envio pedido 
+  router.post('/correo-pedido', async (req, res) => {
+    try {
+      const {titulo, descripcion, precio}  = req.body;
+      
+      const transporter = nodemailer.createTransport({
+        pool: true,
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, 
+        auth: {
+          user: 'eduareyesdo567@gmail.com',
+          pass: 'fgmt xdbr odfn kfuu',
+        },
+      })
+
+      const info = await transporter.sendMail({
+        from: '"Pedido" <foo@example.com>',
+        to: "eduareyesdo567@gmail.com",
+        subject:"Pedido de usuario: " + titulo + "_" + precio,
+        text: "El pedido es: " + descripcion,
       });
   
       console.log('Correo enviado:', info.messageId);

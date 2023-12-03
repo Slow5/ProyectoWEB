@@ -17,11 +17,12 @@ export class PostDialogComponent{
   constructor(public dialog:MatDialog, public authService: AuthService) {}
 
   users:User[] = [];
-
+  
   private userSub: Subscription;
 
   ngOnInit(){
     this.authService.getUser();
+
     this.userSub = this.authService.getUserUpdateListerner().subscribe((users: User[]) =>{
     this.users = users;
     });

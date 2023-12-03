@@ -2,8 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router'
 import { AuthService } from '../auth.services';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
-import * as html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-login',
@@ -71,23 +72,15 @@ export class LoginComponent implements OnInit{
     })
   }
 
-  generarPDF(form: NgForm) {
-    const options = {
-      margin: 10,
-      filename: 'formulario.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  generatePDF() {
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    
+    const documentDefinition = {
+      content: [
+        '¡Hola, este es un PDF simple creado con pdfmake en Angular!'
+      ]
     };
 
-    //const element: HTMLElement = document.getElementById('hola'); // Reemplaza 'tuFormulario' con el ID de tu formulario
-    const element = `
-    <div>
-      <p><strong>Nombre:</strong> ${form.value.nombre}</p>
-      <p><strong>Apellido:</strong> ${form.value.password}</p>
-    </div>
-  `;
-    html2pdf().from(element).set(options).outputPdf();
+    pdfMake.createPdf(documentDefinition).download('simple-pdf.pdf');
   }
-
 }
