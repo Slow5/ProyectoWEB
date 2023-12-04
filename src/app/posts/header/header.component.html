@@ -4,7 +4,9 @@
         <span>BBQ HOUSE</span>
     </h1>    
 
-    <button mat-button [matMenuTriggerFor]="menu" *ngIf="!mostrar()">Nav</button>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="!mostrar()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+    </button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/main" routerLinkActive="mat-accent">Inicio</button>
         <button mat-menu-item routerLink="/entrada" routerLinkActive="mat-accent" *ngIf="!validar()">Menu</button>

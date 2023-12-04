@@ -44,7 +44,11 @@ const routes: Routes = [
   }, {
     path: 'publicacion', 
     component: PostFormComponent
-  }, {
+  },{
+    path: 'publicacion/:postId', 
+    component: PostFormComponent
+  }
+  , {
     path: 'admin',
     component: PostDialogComponent
   }, {

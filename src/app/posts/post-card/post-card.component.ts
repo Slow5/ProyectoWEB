@@ -13,9 +13,9 @@ import { PostService } from "../posts.service";
 export class PostCardComponent implements OnInit, OnDestroy{
 
   posts:Post[] = [];
-  
-  cols
+  user: string
 
+  cols
   private postSub: Subscription;
   isLoading = false;
 
@@ -65,6 +65,12 @@ export class PostCardComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(){
     this.postSub.unsubscribe();
+  }
+
+  usuario(){
+
+    this.user = localStorage.getItem('usuario')
+    return this.user
   }
 
 }

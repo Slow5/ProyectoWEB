@@ -81,9 +81,7 @@ export class PostFormComponent{
       alert("No ingreso datos");
       return;
     }
-
     this.isLoading = true;
-    
     if(this.mode == "create"){
       this.usuario = localStorage.getItem('usuario')
       this.postService.addPost(this.form.value.title, this.form.value.content, this.form.value.image, this.usuario)

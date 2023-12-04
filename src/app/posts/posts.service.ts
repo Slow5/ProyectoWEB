@@ -113,12 +113,12 @@ export class PostService {
                 title: title, 
                 content: content, 
                 imagePath: "",
-                usuario: localStorage.getItem('usuario') // Asegúrate de obtener el usuario correctamente
+                usuario: usuario
             }
             updatePost[oldPostIndex] = post;
             this.posts = updatePost;
             this.postUpdate.next([...this.posts]); 
-            this.router.navigate(["/"]);
+            this.router.navigate(["/main"]);
         });
     }
 }

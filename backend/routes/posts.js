@@ -107,6 +107,16 @@ router.get('/menu', (req, res, next)=>{
     });    
 });
 
+router.get('/posts/:postId', (req, res, next)=>{
+    Post.findById(req.params.postId).then(post =>{
+        if(post){
+            res.status(200).json(post);
+        }else{
+            res.status(404).json({message: 'Post no encontrado'});
+        }    
+    });    
+});
+
 //borrar publicacion
 router.delete('/posts/:id', (req, res, next)=>{
         Post.deleteOne({_id: req.params.id}).then(result =>{
@@ -115,7 +125,7 @@ router.delete('/posts/:id', (req, res, next)=>{
     res.status(200).json({message: 'Comentario eliminado.'});
 });
 
-router.put("/:id", multer({storage:storage}).single("image"), (req,res, next)=>{
+router.put("/posts/:postId", multer({storage:storage}).single("image"), (req,res, next)=>{
 
     let imagePath = req.body.imagePath;
 
@@ -132,7 +142,7 @@ router.put("/:id", multer({storage:storage}).single("image"), (req,res, next)=>{
         usuario: req.body.usuario
     });
 
-    Post.updateOne({_id: req.params.id}, post).then (result=>{
+    Post.updateOne({_id: req.params.postId}, post).then (result=>{
         console.log(result);
         res.status(200).json({
             message: 'Actualizacion completa'
