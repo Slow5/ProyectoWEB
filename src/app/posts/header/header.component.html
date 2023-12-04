@@ -1,9 +1,10 @@
+<br>
 <mat-toolbar>
     <h1>
         <span>BBQ HOUSE</span>
     </h1>    
 
-    <button mat-button [matMenuTriggerFor]="menu" *ngIf="!mostrar()">Navegacion</button>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="!mostrar()">Nav</button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/main" routerLinkActive="mat-accent">Inicio</button>
         <button mat-menu-item routerLink="/entrada" routerLinkActive="mat-accent" *ngIf="!validar()">Menu</button>
@@ -11,12 +12,9 @@
         <button mat-menu-item routerLink="/publicacion" routerLinkActive="mat-accent" *ngIf="!validar()">Publicaciones</button>
         <button mat-menu-item routerLink="/admin" routerLinkActive="mat-accent" *ngIf="validar()">administrador</button>
     </mat-menu>
-
     <span class="spacer"></span>
-
     <button mat-fab extended color="grey" routerLink="/perfil" routerLinkActive="mat-accent" *ngIf="!mostrar()">
         <mat-icon matSuffix>account_circle</mat-icon>
             {{nom}}
     </button>
-
 </mat-toolbar>

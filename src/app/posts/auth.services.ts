@@ -41,14 +41,14 @@ export class AuthService{
         return this.http.post<{any}>("http://localhost:3000/api/correo-id/", this.User);
     }
 
-    signUp(email:String, password:String,nombre: String, apellido: String, numero:String, usertype:String){
+    signUp(email:String, password:String,nombre: String, apellido: String, numero:String, usertype:String, image: String){
         this.Register = {
             email: email,
             password: password,
             nombre: nombre,
             apellido: apellido,
             numero: numero,
-            image: null,
+            image: image,
             usertype: usertype
         }
         return this.http.post<any>(this.url + '/signup', this.Register);
@@ -107,10 +107,18 @@ export class AuthService{
         localStorage.removeItem('userid'); 
         localStorage.removeItem('usertype');
         localStorage.removeItem('contraseña');
-        localStorage.removeItem('apelllido')
+        localStorage.removeItem('apelllido'); 
+        localStorage.removeItem('imagen'); 
+        localStorage.removeItem('image');
+        localStorage.removeItem('orden');
+        localStorage.removeItem('contenido');
+
+        localStorage.removeItem('plato')
+        
         this.router.navigate(['/login']);
     }
 
+    
     //obtener datos de usuarios
 
     private users: User[] = []; 

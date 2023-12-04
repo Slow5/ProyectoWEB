@@ -13,6 +13,9 @@ import { PostService } from "../posts.service";
 export class PostCardComponent implements OnInit, OnDestroy{
 
   posts:Post[] = [];
+  
+  cols
+
   private postSub: Subscription;
   isLoading = false;
 
@@ -24,11 +27,30 @@ export class PostCardComponent implements OnInit, OnDestroy{
       this.isLoading = false;
       this.posts = posts;
     });
+
+    if(window.innerWidth>1200){
+      this.cols=3;
+    } else if(window.innerWidth>768){
+      this.cols=2;
+    }else{
+      this.cols=1;
+    }
+
+    window.addEventListener('resize', ()=> {
+      if(window.innerWidth>1200){
+        this.cols=3;
+      } else if(window.innerWidth>768){
+        this.cols=2;
+      }else{
+        this.cols=1;
+      }
+    })
   }
 
   onDelete(postId: string){
     this.postService.deletePost(postId);
   }
+
 
   validar(){
     let usuario = localStorage.getItem('usertype');

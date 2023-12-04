@@ -18,12 +18,12 @@ export class MenuService{
     getMenus(){
         this.http.get<{message: string, menu: any}>('http://localhost:3000/api/menu')
         .pipe(map((postData)=>{
-            return postData.menu.map(post=> {
+            return postData.menu.map(menu=> {
                 return{
-                    id: post._id, 
-                    titulo: post.titulo, 
-                    descripcion: post.descripcion,
-                    precio: post.precio
+                    id: menu._id, 
+                    titulo: menu.titulo, 
+                    descripcion: menu.descripcion,
+                    precio: menu.precio
                 }
             })
         }))

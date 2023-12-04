@@ -7,15 +7,15 @@
           <mat-card-subtitle>{{usuario}}</mat-card-subtitle>
         </mat-card-header>
 
-        <div class="post-image" style="text-align: center;">
-          <img [src]="imagen"style="border-radius: 5px; width: 50%; margin: auto; height: 250px;">
+        <div class="post-image" style="text-align: center;" >
+          <img [src]="imagen"style="border-radius: 5px; width: 100%; margin:auto; padding:0px;border:3px solid black; height: 250px;">
         </div>
-
+        <br>
         <mat-card-content>
-          <p>Nombre del Usuario: {{nombre}}</p>
-          <p>Apellido del Usuario:{{apellido}}</p>
-          <p>Telefono : {{telefono}}</p>
-          <p>Correo: {{correo}}</p>
+          <p><b>Nombre del Usuario:</b>{{nombre}}</p>
+          <p><b>Apellido del Usuario:</b>{{apellido}}</p>
+          <p><b>Telefono:</b>{{telefono}}</p>
+          <p><b>Correo:</b>{{correo}}</p>
         </mat-card-content>
 
       </mat-card>

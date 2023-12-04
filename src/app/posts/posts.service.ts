@@ -52,8 +52,7 @@ export class PostService {
         postData.append("title", title);
         postData.append("content", content);
         postData.append("image", image, title);
-        postData.append("usuario:", usuario);
-        console.log(usuario) 
+        postData.append("usuario", usuario);
 
         this.http.post<{message:string, post: Post}>('http://localhost:3000/api/posts', postData)
         .subscribe((ResponseData) =>{
@@ -81,9 +80,8 @@ export class PostService {
         });
     }
 
-    updatePost(id: string, title: string, content: string, image: File | string){
-        //const post: Post = { id: id, title: title, content: content};
-        
+    updatePost(id: string, title: string, content: string, image: File | string, usuario:string){
+
         let postData;
         
         if(typeof image === "object"){
@@ -94,13 +92,15 @@ export class PostService {
             postData.append("title", title);
             postData.append("content", content);
             postData.append("image", image, title);
+            postData.append("usuario", usuario)
 
         }else {
             const postData = {
                 id:id,
                 title: title,
                 content: content, 
-                imagePath: image
+                imagePath: image, 
+                usuario: usuario
             };
         }
 

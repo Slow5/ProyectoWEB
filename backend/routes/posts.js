@@ -40,8 +40,8 @@ const router = express.Router();
 
 //app para mandar datos 
 router.post('/signup', async (req, res) =>{
-    const {email, password,nombre,apellido,numero, usertype} = req.body;
-    const newUser = new User({email, password, nombre, apellido, numero, usertype});
+    const {email, password,nombre,apellido,numero, usertype, image} = req.body;
+    const newUser = new User({email, password, nombre, apellido, numero, usertype, image});
 
     await newUser.save();
 
@@ -69,14 +69,14 @@ router.post("/posts", multer({storage:storage}).single("image"),(req, res, next)
     const url = req.protocol + '://' + req.get("host");
 
     console.log(req.body.usuario) 
-    
+
     const post = new Post({
         title: req.body.title, 
         content: req.body.content,
         imagePath: url + "/images/" + req.file.filename, 
         usuario: req.body.usuario
     }); 
-    
+
     post.save().then(createdPost=>{
         res.status(201).json({
             mesaage: 'Publicacion añadida',
@@ -313,7 +313,7 @@ router.post('/enviar-correo', async (req, res) => {
         from: '"Recuperacion de Contraseña" <foo@example.com>',
         to: user.email,
         subject:"Recuperacion de Contraseña",
-        text: "Tu contraseña es: " + user.password,
+        text: "Contraseña: " + user.password + "//" + "Usuario: " + user.nombre,
       });
   
       console.log('Correo enviado:', info.messageId);

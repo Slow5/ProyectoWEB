@@ -1,6 +1,5 @@
 <div class="conteiner">
-  <h2>Menu</h2>
-  
+  <h2>Menu</h2>  
     <div class="pedido">
       <h3>Generar Compra</h3>
       <h4>usuario: {{user}}</h4>
@@ -11,9 +10,10 @@
         </mat-form-field>
         <button mat-raised-button style="width: 100%;" type="submit">Enviar Pedido</button>
       </form>
-      <button mat-raised-button style="width: 100%;" (click)="generatePDF()">Generar Validacion</button>
+      <div class="pdf">
+        <button mat-raised-button style="width: 100%;" (click)="generatePDF()">Generar Validacion</button>
+      </div>
     </div>
-
 </div>
 
 

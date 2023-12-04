@@ -1,16 +1,15 @@
 .container {
-    padding: 50px;
+    padding:auto;
     width: 100%;
     height: auto;
     justify-content: center;
 }
 
 .padre_admin{
-    border: black 1px solid ;
-    padding: 30px;
+    padding: 10px;
 }
 
-h2,h3 {
+h2,h3{
     padding: 15px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;

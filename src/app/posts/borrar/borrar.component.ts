@@ -49,7 +49,7 @@ export class BorrarComponent {
         this.mode = 'edit';
       
         this.userId = paramMap.get('userid');
-        
+
         this.postService.getUsuario(this.userId)
         .subscribe(postData => {
           
@@ -65,10 +65,12 @@ export class BorrarComponent {
           };
          
           this.form.setValue({
-            nombre: this.user.nombre, 
+            nombre: this.user.nombre,
+            password: this.user.password,
+            passwordDos: this.user.password, 
             apellido: this.user.apellido,
             numero: this.user.numero,
-            image: this.user.image, 
+            image: this.user.image,
           });
         });
       }else{

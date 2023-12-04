@@ -86,14 +86,15 @@ export class PostFormComponent{
     
     if(this.mode == "create"){
       this.usuario = localStorage.getItem('usuario')
-      console.log(this.usuario)
       this.postService.addPost(this.form.value.title, this.form.value.content, this.form.value.image, this.usuario)
     }else{
+      this.usuario = localStorage.getItem('usuario')
       this.postService.updatePost(
         this.postId, 
         this.form.value.title, 
         this.form.value.content,
-        this.form.value.image
+        this.form.value.image, 
+        this.usuario
         )
     }
    this.form.reset();

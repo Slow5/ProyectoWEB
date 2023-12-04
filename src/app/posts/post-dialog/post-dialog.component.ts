@@ -49,8 +49,8 @@ export class PostDialogComponent{
       return
     }
 
-    this.authService.signUp(form.value.email, form.value.password, form.value.nombre , "", "", "admin").subscribe( res =>{
-        
+    this.authService.signUp(form.value.email, form.value.password, form.value.nombre, 
+      "", "", "admin", "http://localhost:3000/images/next.jpg").subscribe( res =>{
       console.log(res)
       window.location.reload();
     },
