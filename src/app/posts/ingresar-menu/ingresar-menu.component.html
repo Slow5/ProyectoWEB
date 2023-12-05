@@ -1,0 +1,41 @@
+<div class="container">
+    <br>
+    <h3 style="width: 100%; text-align: center; padding: 10px;">Menu</h3>
+    <mat-accordion multi="true" *ngIf="menus.length > 0">
+        <mat-expansion-panel *ngFor="let post of menus">
+          <mat-expansion-panel-header>
+            <b>{{post.titulo}}</b>
+          </mat-expansion-panel-header>
+          <div>
+            <p style="margin: 10px;"><b>Descripcion: </b>{{post.descripcion}}</p>
+            <p style="margin: 10px;"><b>Precio: </b>{{post.precio}}</p>
+          </div>
+          <mat-action-row>
+            <button mat-button color="warn" (click)="eliminar(post.id)">Eliminar</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    <br>
+    <h3 style="width: 100%; text-align: center; padding: 10px;">Ingresar Menu</h3>
+    <form (submit)="ingresar(login)" #login="ngForm">
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="Comida" ngModel required name="titulo" type="text" #titulo="ngModel">
+          <mat-error *ngIf="titulo.invalid">Ingresa un dato</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field style="width: 100%;">
+          <input matInput type="text" placeholder="descripcion" ngModel required name="descripcion" type="text" #descripcion="ngModel">
+          <mat-error *ngIf="descripcion.invalid">Ingresa un dato</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="precio" ngModel required name="precio" type="text" #precio="ngModel">
+          <mat-error *ngIf="precio.invalid">Ingresa un dato</mat-error>
+        </mat-form-field>
+    
+        <mat-card-actions style="width: 100%;">
+          <button mat-button type="submit" color="primary" style="width: 100%;">Ingresar</button>
+        </mat-card-actions>
+      </form>
+      <br>
+</div>

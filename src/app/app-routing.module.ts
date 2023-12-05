@@ -14,6 +14,7 @@ import { PrComponent } from './posts/pr/pr.component';
 import { PerfilComponent } from './posts/perfil/perfil.component';
 import { BorrarComponent } from './posts/borrar/borrar.component';
 import { RecuperarComponent } from './posts/recuperar/recuperar.component';
+import { IngresarMenuComponent } from './posts/ingresar-menu/ingresar-menu.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,9 @@ const routes: Routes = [
   },{
     path: 'recuperar',
     component: RecuperarComponent
+  },{
+    path: 'ingresarMenu', 
+    component: IngresarMenuComponent
   }
 ];
 

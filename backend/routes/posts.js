@@ -107,6 +107,36 @@ router.get('/menu', (req, res, next)=>{
     });    
 });
 
+router.post('/menu/ingresar', async (req, res) =>{
+    try{
+    const {titulo, descripcion, precio} = req.body;
+    
+    const newMenu = new Menu({
+        titulo, 
+        descripcion, 
+        precio});
+
+    await newMenu.save();
+
+    res.status(201).json({ mensaje: 'Menú insertado correctamente' });
+    
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ mensaje: 'Error al insertar el menú' });
+    }
+    
+});
+
+router.delete('/menu/:id', (req, res, next)=>{
+    Menu.deleteOne({_id: req.params.id}).then(result =>{
+        console.log(result);
+    })
+    res.status(200).json({message: 'Menu eliminado.'});
+});
+
+
+//publicaciones
+
 router.get('/posts/:postId', (req, res, next)=>{
     Post.findById(req.params.postId).then(post =>{
         if(post){

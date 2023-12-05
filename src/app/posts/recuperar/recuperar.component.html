@@ -1,9 +1,7 @@
 <div class="container">
     <mat-card>
       <mat-card-content>
-        
         <h1 style="color: black; width: 100%;">Recuperar Contraseña</h1>
-
         <form (submit)="enviar(login)" #login="ngForm">
           <mat-form-field>
             <input matInput placeholder="Correo de usuario" ngModel required name="correo" type="text" #correo="ngModel">
@@ -12,8 +10,7 @@
             <button mat-button type="submit">Enviar Correo</button>
           </mat-card-actions>
         </form>
-        
+        <button mat-button routerLink="/login" routerLinkActive="mat-accent">Regresar</button>
       </mat-card-content>
     </mat-card>
-
   </div>

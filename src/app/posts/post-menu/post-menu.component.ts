@@ -4,8 +4,6 @@ import { Menu } from "../menu.model";
 import { Subscription } from "rxjs";
 import { NgForm } from "@angular/forms";
 
-import { NgFor } from "@angular/common";
-
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 

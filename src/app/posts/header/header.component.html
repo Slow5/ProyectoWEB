@@ -13,7 +13,9 @@
         <button mat-menu-item routerLink="/info" routerLinkActive="mat-accent" *ngIf="!validar()">Informacion</button>
         <button mat-menu-item routerLink="/publicacion" routerLinkActive="mat-accent" *ngIf="!validar()">Publicaciones</button>
         <button mat-menu-item routerLink="/admin" routerLinkActive="mat-accent" *ngIf="validar()">administrador</button>
+        <button mat-menu-item routerLink="/ingresarMenu" routerLinkActive="mat-accent" *ngIf="validar()">Menu</button>
     </mat-menu>
+    
     <span class="spacer"></span>
     <button mat-fab extended color="grey" routerLink="/perfil" routerLinkActive="mat-accent" *ngIf="!mostrar()">
         <mat-icon matSuffix>account_circle</mat-icon>
