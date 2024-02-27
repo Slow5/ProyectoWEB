@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require("body-parser"); 
 const mongoose = require("mongoose");
-const app = express();
 const path = require('path');
 
 const postRoute = require("./routes/posts");
+const app = express();
 
 mongoose.connect("mongodb+srv://slow:612002@proyecto.3ipyamx.mongodb.net/proyecto")
 

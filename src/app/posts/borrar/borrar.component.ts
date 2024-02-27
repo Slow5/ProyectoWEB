@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { mimeType } from '../post-form/mime-type.validator';
 import { AuthService } from '../auth.services';
 import { User } from '../user.model';
+
 @Component({
   selector: 'app-borrar',
   templateUrl: './borrar.component.html',

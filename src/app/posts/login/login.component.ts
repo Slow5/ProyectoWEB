@@ -16,9 +16,7 @@ export class LoginComponent implements OnInit{
   constructor (private authService: AuthService, private router: Router){}
 
   ngOnInit(){
-
     localStorage.setItem('validar', "si")
- 
   }
 
   logIn(form: NgForm){
@@ -27,10 +25,7 @@ export class LoginComponent implements OnInit{
       alert("No ingreso datos");
       return;
     }
-
-    this.authService.logIn(form.value.nombre, form.value.password).subscribe( res =>{
-      console.log(res)
-      
+    this.authService.logIn(form.value.nombre, form.value.password).subscribe( res =>{  
       localStorage.setItem('token', res.token);
       localStorage.removeItem('validar');
       this.router.navigate(['/main']);
@@ -47,7 +42,6 @@ export class LoginComponent implements OnInit{
 
   logTypeIn(form: NgForm){
     this.authService.getAcountType(form.value.nombre, form.value.password).subscribe( res =>{
-      console.log(res)
       localStorage.setItem('usertype', JSON.stringify(res.type));
     },
     err =>{
@@ -57,30 +51,14 @@ export class LoginComponent implements OnInit{
 
   logIdIn(form: NgForm){
     this.authService.getUserId(form.value.nombre, form.value.password).subscribe( res =>{
-      console.log(res)
-
-      
       localStorage.setItem('userid', res.id);
       localStorage.setItem('usuario', res.nom);
       localStorage.setItem('gmail', res.gmail);
-
     },
     err =>{
       console.log(err)
       alert("usuario no existente")
       form.resetForm();
     })
-  }
-
-  generatePDF() {
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    
-    const documentDefinition = {
-      content: [
-        '¡Hola, este es un PDF simple creado con pdfmake en Angular!'
-      ]
-    };
-
-    pdfMake.createPdf(documentDefinition).download('simple-pdf.pdf');
   }
 }

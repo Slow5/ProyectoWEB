@@ -12,8 +12,8 @@ import { Observable } from 'rxjs';
 
 export class AuthService{
     
-    private url = 'http://localhost:3000/api'
-
+    //private url = 'http://localhost:3000/api'
+    private url = 'https://lvrnmkg9-3000.usw3.devtunnels.ms'
     User = {}
 
     Register = {}
@@ -29,16 +29,14 @@ export class AuthService{
             numero:string, 
             usertype:string, 
             image: string
-        }>(
-            "http://localhost:3000/api/users/" + id
-        );
+        }>(this.url + "/api/users/" + id);
     }
 
     getEmailId(email:string){
         this.User = {
             email: email
         }
-        return this.http.post<{any}>("http://localhost:3000/api/correo-id/", this.User);
+        return this.http.post<{any}>(this.url + "/api/correo-id/", this.User);
     }
 
     signUp(email:String, password:String,nombre: String, apellido: String, numero:String, usertype:String, image: String){
@@ -51,7 +49,7 @@ export class AuthService{
             image: image,
             usertype: usertype
         }
-        return this.http.post<any>(this.url + '/signup', this.Register);
+        return this.http.post<any>(this.url + '/api/signup', this.Register);
     }
 
     getCorreo(email:string, clave: string){
@@ -59,7 +57,7 @@ export class AuthService{
             email:email,
             clave: clave
         }
-        return this.http.post<{any}>("http://localhost:3000/api/enviar-correo", this.Register)
+        return this.http.post<{any}>(this.url + "/api/enviar-correo", this.Register)
     }
 
     logIn(nombre:String, password:String){
@@ -67,7 +65,7 @@ export class AuthService{
             nombre: nombre,
             password: password
         }
-        return this.http.post<any>(this.url + '/login',this.User);
+        return this.http.post<any>(this.url + '/api/login',this.User);
     }
 
     getAcountType(nombre:String, password:String){
@@ -75,7 +73,7 @@ export class AuthService{
             nombre: nombre,
             password: password
         }
-        return this.http.post<any>(this.url + '/type',this.User);   
+        return this.http.post<any>(this.url + '/api/type',this.User);   
     }
 
     getUserId(nombre:String, password:String){
@@ -83,7 +81,7 @@ export class AuthService{
             nombre: nombre,
             password: password
         }
-        return this.http.post<any>(this.url + '/emailId',this.User);
+        return this.http.post<any>(this.url + '/api/emailId',this.User);
     }
 
     loggedIn(){
@@ -125,7 +123,7 @@ export class AuthService{
     private userUpdate = new Subject<User[]>();
 
     getUser(){
-        this.http.get<{message: string, users: any}>('http://localhost:3000/api/user')
+        this.http.get<{message: string, users: any}>(this.url + '/api/user')
         .pipe(map((userData)=>{
             return userData.users.map(users=> {
                 return{
@@ -152,7 +150,7 @@ export class AuthService{
     }
     
     deleteUser(id: string){
-        this.http.delete("http://localhost:3000/api/deleteuser/"+ id)
+        this.http.delete(this.url + "/api/deleteuser/"+ id)
         .subscribe(()=>{
             console.log('Eliminado');
             this.getUser();
@@ -160,7 +158,7 @@ export class AuthService{
     }
 
     getUsers(usuario: { email: string }): Observable<any> {
-        return this.http.post("http://localhost:3000/api/getUser", usuario);
+        return this.http.post(this.url + "/api/getUser", usuario);
     }
 
     UpdateUser(id: string, email: string, password: string, 
@@ -195,7 +193,7 @@ export class AuthService{
             };
         }
 
-        this.http.put("http://localhost:3000/api/users/" + id, postData)
+        this.http.put(this.url + "/api/users/" + id, postData)
         .subscribe(response =>{
             const updatePost = [...this.users];
             const oldPostIndex = updatePost.findIndex(p => p.id === id);
@@ -218,7 +216,7 @@ export class AuthService{
     }
 
     getUsuarios(){
-        this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts')
+        this.http.get<{message: string, posts: any}>(this.url + '/api/posts')
         .pipe(map((postData)=>{
             return postData.posts.map(post=> {
                 return{
@@ -236,5 +234,4 @@ export class AuthService{
             this.userUpdate.next([...this.users]);
         });
     }
-
 }

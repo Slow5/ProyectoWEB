@@ -18,7 +18,6 @@ export class PrComponent {
   apellido: String
   numero: String
 
-
   constructor (private authService: AuthService, private router: Router){}
 
   SignUp(form:NgForm){
@@ -37,7 +36,8 @@ export class PrComponent {
         this.apellido = localStorage.getItem('apellido')
         this.numero = localStorage.getItem('numero')
 
-      this.authService.signUp(this.email, this.password, this.nombre, this.apellido, this.apellido, "usuario", "http://localhost:3000/images/next.jpg").subscribe( res =>{
+      this.authService.signUp(this.email, this.password, this.nombre, this.apellido, this.apellido, 
+        "usuario", "http://lvrnmkg9-3000.usw3.devtunnels.ms/images/next.jpg").subscribe( res =>{
         
         localStorage.removeItem("email")
         localStorage.removeItem("contraseña")

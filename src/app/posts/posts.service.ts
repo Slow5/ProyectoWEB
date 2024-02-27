@@ -12,16 +12,16 @@ export class PostService {
     private posts: Post[] = []; //Primer matriz
     private postUpdate = new Subject<Post[]>();
 
+    private url = 'https://lvrnmkg9-3000.usw3.devtunnels.ms'
+
     constructor(private http: HttpClient, private router: Router){}
     
     getPost(id:string){
-        return this.http.get<{_id:string, title:string, content:string, imagePath: string}>(
-            "http://localhost:3000/api/posts/" + id
-        );
+        return this.http.get<{_id:string, title:string, content:string, imagePath: string}>(this.url + "/api/posts/" + id);
     }
 
     getPosts(){
-        this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts')
+        this.http.get<{message: string, posts: any}>(this.url + '/api/posts')
         
         .pipe(map((postData)=>{
             return postData.posts.map(post=> {
@@ -54,7 +54,7 @@ export class PostService {
         postData.append("image", image, title);
         postData.append("usuario", usuario);
 
-        this.http.post<{message:string, post: Post}>('http://localhost:3000/api/posts', postData)
+        this.http.post<{message:string, post: Post}>(this.url + '/api/posts', postData)
         .subscribe((ResponseData) =>{
 
             console.log(usuario) 
@@ -72,7 +72,7 @@ export class PostService {
     }
     
     deletePost(postId: string){
-        this.http.delete("http://localhost:3000/api/posts/" + postId)
+        this.http.delete(this.url + "/api/posts/" + postId)
         .subscribe(()=>{
             const updatePost = this.posts.filter(post => post.id !== postId);
             this.posts = updatePost;
@@ -104,7 +104,7 @@ export class PostService {
             };
         }
 
-        this.http.put("http://localhost:3000/api/posts/" + id, postData)
+        this.http.put(this.url + "/api/posts/" + id, postData)
         .subscribe(response =>{
             const updatePost = [...this.posts];
             const oldPostIndex = updatePost.findIndex(p => p.id === id);

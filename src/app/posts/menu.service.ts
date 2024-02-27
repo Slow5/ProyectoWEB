@@ -9,6 +9,9 @@ import { Router } from "@angular/router";
 
 
 export class MenuService{
+    
+    private url = 'https://lvrnmkg9-3000.usw3.devtunnels.ms'
+
     Menu = {}
     private menu: Menu[] = []; 
     private menuUpdate = new Subject<Menu[]>();
@@ -21,11 +24,11 @@ export class MenuService{
             descripcion: descripcion,
             precio: precio
         }
-        return this.http.post<any>('http://localhost:3000/api/menu/ingresar', this.Menu);
+        return this.http.post<any>( this.url + '/api/menu/ingresar', this.Menu);
     }
 
     getMenus(){
-        this.http.get<{message: string, menu: any}>('http://localhost:3000/api/menu')
+        this.http.get<{message: string, menu: any}>(this.url + '/api/menu')
         .pipe(map((postData)=>{
             return postData.menu.map(menu=> {
                 return{
@@ -52,11 +55,11 @@ export class MenuService{
             descripcion: descripcion,
             precio: precio
         }
-        return this.http.post<{any}>("http://localhost:3000/api/correo-pedido", this.Menu)
+        return this.http.post<{any}>( this.url + "/api/correo-pedido", this.Menu)
     }
 
     deleteMenu(id: string){
-        this.http.delete("http://localhost:3000/api/menu/"+ id)
+        this.http.delete(this.url + "/api/menu/"+ id)
         .subscribe(()=>{
             const updatePost = this.menu.filter(post => post.id !== id);
             this.menu = updatePost;

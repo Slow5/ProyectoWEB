@@ -1,14 +1,11 @@
 const express = require('express')
 const multer = require('multer')
-
 const nodemailer = require('nodemailer')
-
+const jwt = require('jsonwebtoken');
 
 const Menu = require('../models/menu')
 const Post = require('../models/post')
 const User = require('../models/User')
-
-const jwt = require('jsonwebtoken');
 
 const MIME_TYPE_MAP = {
     'image/png': 'png', 
@@ -63,10 +60,9 @@ router.post('/login', async (req, res) => {
 // datos del usuario
 
 // publicaciones
-
 router.post("/posts", multer({storage:storage}).single("image"),(req, res, next) => {
 
-    const url = req.protocol + '://' + req.get("host");
+    const url = req.protocol + '://' + "lvrnmkg9-3000.usw3.devtunnels.ms" //req.get("host");
 
     console.log(req.body.usuario) 
 
@@ -119,12 +115,10 @@ router.post('/menu/ingresar', async (req, res) =>{
     await newMenu.save();
 
     res.status(201).json({ mensaje: 'Menú insertado correctamente' });
-    
     }catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: 'Error al insertar el menú' });
     }
-    
 });
 
 router.delete('/menu/:id', (req, res, next)=>{
@@ -160,7 +154,7 @@ router.put("/posts/:postId", multer({storage:storage}).single("image"), (req,res
     let imagePath = req.body.imagePath;
 
     if(req.file){
-        const url = req.protocol + '://' + req.get("host");
+        const url = req.protocol + '://' +  "lvrnmkg9-3000.usw3.devtunnels.ms" // req.get("host");
         imagePath = url + "/images/" + req.file.filename
     }
 
@@ -198,7 +192,7 @@ router.put("/users/:id", multer({storage:storage}).single("image"), (req,res, ne
     let imagePath = req.body.image;
 
     if(req.file){
-        const url = req.protocol + '://' + req.get("host");
+        const url = req.protocol + '://' +  "lvrnmkg9-3000.usw3.devtunnels.ms" //req.get("host");
         imagePath = url + "/images/" + req.file.filename
     }
 
@@ -364,6 +358,7 @@ router.post('/enviar-correo', async (req, res) => {
       res.status(500).json({ error: 'Error al enviar el correo' });
     }
   });
+  
   //envio pedido 
   router.post('/correo-pedido', async (req, res) => {
     try {
